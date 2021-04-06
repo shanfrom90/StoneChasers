@@ -9,7 +9,7 @@ namespace Sailing_Rocks.Models
     {
         public int Id { get; set; }
         public string Lat { get; set; }
-        public string Lon { get; set; }
+        public string Lng { get; set; }
         public int RockId { get; set; }
         public virtual Rock rock { get; set; }
         public DateTime LocatedOn { get; set; }
