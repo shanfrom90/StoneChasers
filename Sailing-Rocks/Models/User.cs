@@ -22,18 +22,9 @@ namespace Sailing_Rocks.Models
         public DateTime CreatedOn { get; set; }
         public virtual ICollection<Rock> Rocks { get; set; }
 
-        public User(int id, string firstName, string lastName, string password, string image, string hometown, string bio, string userName, string email, DateTime createdOn)
+        public User()
         {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Password = password;
-            Image = image;
-            Hometown = hometown;
-            Bio = bio;
-            UserName = userName;
-            Email = email;
-            CreatedOn = createdOn;
+            
         }
 
         //add an empty constructor?

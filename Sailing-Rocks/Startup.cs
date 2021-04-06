@@ -1,3 +1,5 @@
+using Sailing_Rocks.Models;
+//using Sailing_Rocks.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,7 +25,11 @@ namespace Sailing_Rocks
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddControllersWithViews();
+            //services.AddScoped<IRepository<User>, UserRepository>();
+            //services.AddScoped<IRepository<Rock>, RockRepository>();
+            //services.AddScoped<IRepository<Location>, LocationRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
