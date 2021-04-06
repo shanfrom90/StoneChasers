@@ -9,7 +9,7 @@ namespace Sailing_Rocks.Repositories
 {
     public class RockRepository : Repository<Rock>, IRepository<Rock>
     {
-        public RockRepository(RockContext db) : base(db)
+        public RockRepository(SailingRocksContext db) : base(db)
         {
 
         }

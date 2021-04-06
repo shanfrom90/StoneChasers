@@ -9,7 +9,7 @@ namespace Sailing_Rocks.Repositories
 {
     public class LocationRepository : Repository<Location>, IRepository<Location>
     {
-        public LocationRepository(RockContext db) : base(db)
+        public LocationRepository(SailingRocksContext db) : base(db)
         {
 
         }
