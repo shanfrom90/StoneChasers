@@ -9,7 +9,6 @@ namespace Sailing_Rocks.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
 
-
     {
         private DbContext db;
 
