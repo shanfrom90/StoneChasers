@@ -20,7 +20,7 @@ namespace Sailing_Rocks.Models
         public string UserName { get; set; }
         public string Email { get; set; }
         public DateTime CreatedOn { get; set; }
-       //public virtual ICollection<Rock> Rocks { get; set; }
+        public virtual ICollection<Rock> Rocks { get; set; }
 
         public User(int id, string firstName, string lastName, string password, string image, string hometown, string bio, string userName, string email, DateTime createdOn)
         {
