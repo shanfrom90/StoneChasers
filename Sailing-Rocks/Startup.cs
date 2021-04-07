@@ -1,5 +1,5 @@
 using Sailing_Rocks.Models;
-//using Sailing_Rocks.Repositories;
+using Sailing_Rocks.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Sailing_Rocks.Repository;
 
 namespace Sailing_Rocks
 {
@@ -26,10 +27,13 @@ namespace Sailing_Rocks
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddDbContext<SailingRocksContext>();
             services.AddControllersWithViews();
-            //services.AddScoped<IRepository<User>, UserRepository>();
-            //services.AddScoped<IRepository<Rock>, RockRepository>();
-            //services.AddScoped<IRepository<Location>, LocationRepository>();
+            services.AddScoped<IRepository<User>, UserRepository>();
+            services.AddScoped<IRepository<Rock>, RockRepository>();
+            services.AddScoped<IRepository<Location>, LocationRepository>();
+            services.AddScoped<IRepository<UserRock>, UserRockRepository>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

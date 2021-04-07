@@ -43,6 +43,7 @@ namespace Sailing_Rocks
                 new Rock()
                 {
                     Id = 1,
+                    UserId = 1,
                     Name = "Dwyane",
                     Image = "https://prowrestling.fandom.com/wiki/The_Rock",
                     CreatedOn = DateTime.Now,
@@ -60,6 +61,15 @@ namespace Sailing_Rocks
                     IsCurrent = true
                 }
                 );
+            modelBuilder.Entity<UserRock>().HasData(
+                new UserRock()
+                {
+                    Id = 1,
+                    RockId = 1,
+                    UserId = 1
+                }
+            );
+
 
 
         }
