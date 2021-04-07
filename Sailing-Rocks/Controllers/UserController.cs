@@ -27,15 +27,54 @@ namespace Sailing_Rocks.Controllers
         [HttpPost]
         public ViewResult Create(User model)
         {
-            return View();
+            model.CreatedOn = DateTime.Now;
+
+            userRepo.Create(model);
+
+            ViewBag.Result = "You've successfuly created your profile. You Rock!";
+
+            return View(model); 
         }
 
- 
-
-
-        public IActionResult Index()
+        public ViewResult Details(int id)
         {
-            return View();
+            var user = userRepo.GetById(id);
+
+            return View(user);
         }
+
+        public ViewResult Update(int id)
+        {
+            var user = userRepo.GetById(id);
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public ViewResult Update(User model)
+        {
+            userRepo.Update(model);
+
+            ViewBag.Result = "You have updated your profile.";
+
+            return View(model);
+        }
+
+
+        public ViewResult Delete(int id)
+        {
+            var user = userRepo.GetById(id);
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(User model)
+        {
+            userRepo.Delete(model);
+
+            return RedirectToAction("Create");
+        }
+                        
     }
 }
