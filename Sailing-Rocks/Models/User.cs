@@ -21,6 +21,7 @@ namespace Sailing_Rocks.Models
         public string Email { get; set; }
         public DateTime CreatedOn { get; set; }
         public virtual ICollection<Rock> Rocks { get; set; }
+        public virtual ICollection<UserRock> UserRocks { get; set; }
 
         public User()
         {
