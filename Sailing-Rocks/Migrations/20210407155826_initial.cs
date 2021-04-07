@@ -91,13 +91,13 @@ namespace Sailing_Rocks.Migrations
                         column: x => x.RockId,
                         principalTable: "Rocks",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_UserRock_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.InsertData(

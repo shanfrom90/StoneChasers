@@ -43,11 +43,11 @@ namespace Sailing_Rocks
                 new Rock()
                 {
                     Id = 1,
-                    UserId = 1,
                     Name = "Dwyane",
                     Image = "https://prowrestling.fandom.com/wiki/The_Rock",
                     CreatedOn = DateTime.Now,
-                    Serial = "testSerial"
+                    Serial = "testSerial",
+                    UserId = 1
                 }
                 );
             modelBuilder.Entity<Location>().HasData(
