@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Sailing_Rocks.Models;
 using Sailing_Rocks.Repository;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,11 @@ namespace Sailing_Rocks.Repositories
         {
             db.Set<T>().Update(entity);
             Save();
+        }
+
+        public Rock GetRockBySerial(string serial)
+        {
+            return db.Set<Rock>().Where(r => r.Serial == serial).FirstOrDefault();
         }
 
     }

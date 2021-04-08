@@ -29,7 +29,7 @@ namespace Sailing_Rocks.Controllers
         public ViewResult Details(int id)
         {
             var rock = rockRepo.GetById(id);
-            return View(rock);
+            return View(new RockLocationVM() { Rock = rock, Location = new Location() { RockId = id } });
         }
 
         // GET: RockController/Create

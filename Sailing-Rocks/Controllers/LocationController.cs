@@ -31,8 +31,10 @@ namespace Sailing_Rocks.Controllers
             return View(location);
         }
 
+
+        //can get rid of this function if location create is in rock details
         // GET: LocationController/Create
-        public ActionResult Create()
+        public ViewResult Create()
         {   
             //may need list of rocks?
             return View(new Location());
@@ -41,14 +43,13 @@ namespace Sailing_Rocks.Controllers
         // POST: LocationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Location model)
+        public ActionResult Create(RockLocationVM model)
         {
 
             //list of rocks
-            locationRepo.Create(model);
-            ViewBag.Result = "Your location has been added.";
+            locationRepo.Create(model.Location);
            
-            return View(model);
+            return RedirectToAction("Details", "Rock", new {id = model.Location.RockId});
             
         }
 
