@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,8 +18,10 @@ namespace Sailing_Rocks.Models
 
         public string Hometown { get; set; }
         public string Bio { get; set; }
+        [Display(Name = "Name")]
         public string UserName { get; set; }
         public string Email { get; set; }
+        [Display(Name = "Sailing Rocks Member Since")]
         public DateTime CreatedOn { get; set; }
         public virtual ICollection<Rock> Rocks { get; set; }
         public virtual ICollection<UserRock> UserRocks { get; set; }
