@@ -25,6 +25,7 @@ namespace Sailing_Rocks.Models
         [Display(Name = "Is Current:")]
 
         public bool IsCurrent { get; set; }
+        public string LocationImage { get; set; }
 
         public Location()
         {

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Sailing_Rocks.Repository;
 
+
 namespace Sailing_Rocks
 {
     public class Startup
@@ -26,6 +27,7 @@ namespace Sailing_Rocks
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession();
             services.AddMvc();
             services.AddDbContext<SailingRocksContext>();
             services.AddControllersWithViews();
@@ -53,7 +55,7 @@ namespace Sailing_Rocks
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
