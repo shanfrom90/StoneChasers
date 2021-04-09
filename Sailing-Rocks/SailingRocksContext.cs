@@ -44,7 +44,7 @@ namespace Sailing_Rocks
                 {
                     Id = 1,
                     Name = "Dwyane",
-                    Image = "https://prowrestling.fandom.com/wiki/The_Rock",
+                    Image = "https://thumbs.dreamstime.com/b/dwayne-johnson-80711565.jpg",
                     CreatedOn = DateTime.Now,
                     Serial = "testSerial",
                     UserId = 1
@@ -58,7 +58,7 @@ namespace Sailing_Rocks
                     Lng = "-81.65136941810817",
                     RockId = 1,
                     LocatedOn = DateTime.Now,
-                    IsCurrent = true
+                    LocationImage = "https://media-cdn.tripadvisor.com/media/photo-s/14/61/c4/4f/lighthouse-at-headlands.jpg"
                 }
                 );
             modelBuilder.Entity<UserRock>().HasData(
