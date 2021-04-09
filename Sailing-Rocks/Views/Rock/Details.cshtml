@@ -1,0 +1,94 @@
+﻿@model Sailing_Rocks.Models.RockLocationVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Rock Details</h1>
+
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rock.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rock.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rock.Image)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rock.Image)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rock.CreatedOn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rock.CreatedOn)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rock.Serial)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rock.Serial)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rock.User)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rock.User.Id)
+        </dd>
+    </dl>
+
+    //will display all locations
+    @*@foreach (var location in Model.Rock.Locations)
+        {
+            <p>@location.Lat</p>
+            <p>@location.Lng</p>
+
+        }*@
+    <h2>Last Seen Here:</h2>
+    <p>@Model.Rock.Locations.LastOrDefault().Lat</p>
+    <p>@Model.Rock.Locations.LastOrDefault().Lng</p>
+
+</div>
+    <div class="col-md-4">
+    <form asp-action="Create" asp-controller="Location">
+        <input asp-for= "Location.RockId" type="hidden" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Location.Lat" class="control-label"></label>
+            <input asp-for="Location.Lat" class="form-control" />
+            <span asp-validation-for="Location.Lat" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Location.Lng" class="control-label"></label>
+            <input asp-for="Location.Lng" class="form-control" />
+            <span asp-validation-for="Location.Lng" class="text-danger"></span>
+        </div>
+        @*<div class="form-group">
+                <label asp-for="RockId" class="control-label"></label>
+                <select asp-for="RockId" class ="form-control" asp-items="ViewBag.RockId"></select>
+            </div>*@
+        <div class="form-group">
+            <label asp-for="Location.LocatedOn" class="control-label"></label>
+            <input asp-for="Location.LocatedOn" class="form-control" />
+            <span asp-validation-for="Location.LocatedOn" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Location.IsCurrent" type="hidden"/> 
+            </label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Rock.Id">Edit</a> |
+</div>

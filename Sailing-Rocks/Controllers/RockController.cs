@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Session;
 
 namespace Sailing_Rocks.Controllers
 {
@@ -29,12 +30,14 @@ namespace Sailing_Rocks.Controllers
         public ViewResult Details(int id)
         {
             var rock = rockRepo.GetById(id);
-            return View(rock);
+            return View(new RockLocationVM() { Rock = rock, Location = new Location() { RockId = id } });
         }
 
         // GET: RockController/Create
-        public ViewResult Create()
-        {
+        public ViewResult Create(int userId) { 
+        
+            ViewBag.UserId = HttpContext.Session.GetInt32("userId");
+          
             return View();
         }
 
@@ -51,7 +54,15 @@ namespace Sailing_Rocks.Controllers
         public ActionResult Edit(int id)
         {
             var rock = rockRepo.GetById(id);
-            return View(rock);
+            var UserId = HttpContext.Session.GetInt32("userId");
+            if(rock.UserId == UserId)
+            {
+                return View(rock);
+            }
+            else
+            {
+                return RedirectToAction("Details", "User", new { id = UserId });
+            }
 
         }
 
