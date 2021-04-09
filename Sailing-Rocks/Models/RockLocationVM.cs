@@ -9,5 +9,7 @@ namespace Sailing_Rocks.Models
     {
         public Rock Rock {get; set;}
         public Location Location { get; set; }
+
+        public UserRock UserRock { get; set; }
     }
 }

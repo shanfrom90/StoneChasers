@@ -7,22 +7,22 @@
 <h1>Rock Details</h1>
 
 <div>
-        <h4>@Model.Rock.Name</h4>
+    <h4>@Model.Rock.Name</h4>
     <hr />
-        <img src="@Model.Rock.Image" style="width: 25%;" alt="Content Photo">
+    <img src="@Model.Rock.Image" style="width: 25%;" alt="Content Photo">
     <dl class="row">
         @*<dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Rock.Name)
-        </dt>*@
+                @Html.DisplayNameFor(model => model.Rock.Name)
+            </dt>*@
         @*<dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Rock.Name)
-        </dd>*@
+                @Html.DisplayFor(model => model.Rock.Name)
+            </dd>*@
         @*<dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Rock.Image)
-        </dt>*@
+                @Html.DisplayNameFor(model => model.Rock.Image)
+            </dt>*@
         @*<dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Rock.Image)
-        </dd>*@
+                @Html.DisplayFor(model => model.Rock.Image)
+            </dd>*@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Rock.CreatedOn)
         </dt>
@@ -42,8 +42,19 @@
             @Html.DisplayFor(model => model.Rock.User.Id)
         </dd>
     </dl>
+    <h2>Friends of @Model.Rock.Name</h2>
+    @foreach (var rockFriend in Model.Rock.UserRocks)
+    {
+        <div class="Content">
+            <p>@rockFriend.User.FirstName</p>
+            <p>@rockFriend.User.LastName</p>
+            <p>@rockFriend.User.UserName</p>
+            <img src="@rockFriend.User.Image" style="width: 25%;" alt="Content Photo">
 
-    //will display all locations
+        </div>
+    }
+
+    @*will display all locations*@
     @*@foreach (var location in Model.Rock.Locations)
         {
             <p>@location.Lat</p>
@@ -51,37 +62,40 @@
 
         }*@
     <h2>Last Seen Here:</h2>
+    <img src="@Model.Rock.Locations.LastOrDefault().LocationImage"/>
     <p>@Model.Rock.Locations.LastOrDefault().Lat</p>
     <p>@Model.Rock.Locations.LastOrDefault().Lng</p>
 
 </div>
+    <h3>Add a New Location</h3>
     <div class="col-md-4">
-    <form asp-action="Create" asp-controller="Location">
-        <input asp-for= "Location.RockId" type="hidden" />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Location.Lat" class="control-label"></label>
-            <input asp-for="Location.Lat" class="form-control" />
-            <span asp-validation-for="Location.Lat" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Location.Lng" class="control-label"></label>
-            <input asp-for="Location.Lng" class="form-control" />
-            <span asp-validation-for="Location.Lng" class="text-danger"></span>
-        </div>
-        @*<div class="form-group">
-                <label asp-for="RockId" class="control-label"></label>
-                <select asp-for="RockId" class ="form-control" asp-items="ViewBag.RockId"></select>
-            </div>*@
-        <div class="form-group">
-            <label asp-for="Location.LocatedOn" class="control-label"></label>
-            <input asp-for="Location.LocatedOn" class="form-control" />
-            <span asp-validation-for="Location.LocatedOn" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>
-    </form>
+        <form asp-action="Create" asp-controller="Location">
+            <input asp-for="Location.RockId" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Location.Lat" class="control-label"></label>
+                <input asp-for="Location.Lat" class="form-control" />
+                <span asp-validation-for="Location.Lat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location.Lng" class="control-label"></label>
+                <input asp-for="Location.Lng" class="form-control" />
+                <span asp-validation-for="Location.Lng" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location.LocationImage" class="control-label"></label>
+                <input asp-for="Location.LocationImage" class="form-control" />
+                <span asp-validation-for="Location.LocationImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location.LocatedOn" class="control-label"></label>
+                <input asp-for="Location.LocatedOn" class="form-control" />
+                <span asp-validation-for="Location.LocatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
 </div>
 
 
