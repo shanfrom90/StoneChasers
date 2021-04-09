@@ -25,7 +25,7 @@ namespace Sailing_Rocks.Controllers
         }
 
         [HttpPost]
-        public ViewResult Create(User model)
+        public ActionResult Create(User model)
         {
             model.CreatedOn = DateTime.Now;
 
@@ -33,7 +33,7 @@ namespace Sailing_Rocks.Controllers
 
             ViewBag.Result = "You've successfuly created your profile. You Rock!";
 
-            return View(model); 
+            return RedirectToAction("Details", "User" , new {id = model.Id}); 
         }
 
         public ViewResult Details(int id)
