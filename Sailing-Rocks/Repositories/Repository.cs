@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Sailing_Rocks.Extensions;
 using Sailing_Rocks.Models;
 using Sailing_Rocks.Repository;
 using System;
@@ -50,5 +51,19 @@ namespace Sailing_Rocks.Repositories
             return db.Set<Rock>().Where(r => r.Serial == serial).FirstOrDefault();
         }
 
+        public LoginResult CheckLogin(string username, string password)
+        {
+            var user = db.Set<User>().Where(u => u.UserName == username && u.Password == Helpers.Helper.EncryptPassword(password)).FirstOrDefault();
+
+            if (user == null)
+            {
+                return new LoginResult() { Result = false, Message = "No such user could be found.", User = null };
+            }
+            else
+            {
+                return new LoginResult() { Result = true, Message = "", User = user };
+            }
+
+        }
     }
 }
