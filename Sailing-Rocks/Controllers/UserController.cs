@@ -34,8 +34,7 @@ namespace Sailing_Rocks.Controllers
 
             ViewBag.Result = "You've successfuly created your profile. You Rock!";
 
-            return RedirectToAction("Login", "User", new { id = model.Id });
-            //return RedirectToAction("Details", "User" , new {id = model.Id}); 
+            return RedirectToAction("Login", "User"/*, new { id = model.Id }*/);
         }
 
         public ViewResult Details(int id)
@@ -91,6 +90,7 @@ namespace Sailing_Rocks.Controllers
             {
                 //add session
                 HttpContext.Session.SetString("Username", response.User.UserName);
+                HttpContext.Session.SetString("UserId", response.User.Id.ToString());
 
                 return RedirectToAction("Index", "Home");
             }
@@ -99,6 +99,12 @@ namespace Sailing_Rocks.Controllers
                 ViewBag.ResultMessage = response.Message;
                 return View(model);
             }
+        }
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
     }

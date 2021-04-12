@@ -28,12 +28,12 @@ namespace Sailing_Rocks.Models
 
 
         //add a default image?
+        [RegularExpression("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")]
         public string Image { get; set; }
 
         public string Hometown { get; set; }
         public string Bio { get; set; }
         [Display(Name = "Username")]
-
         [Required]
         public string UserName { get; set; }
         public string Email { get; set; }
