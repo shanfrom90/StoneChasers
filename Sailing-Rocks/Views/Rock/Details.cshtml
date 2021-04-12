@@ -10,6 +10,16 @@
     <h4>@Model.Rock.Name</h4>
     <hr />
     <img src="@Model.Rock.Image" style="width: 25%;" alt="Content Photo">
+
+    @foreach (var location in @Model.Rock.Locations)
+    {
+        <div class="Content">
+            
+            <img src="@location.LocationImage" style="width: 25%;" alt="Content Photo">
+
+        </div>
+    }
+
     <dl class="row">
         @*<dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Rock.Name)
@@ -62,7 +72,7 @@
 
         }*@
     <h2>Last Seen Here:</h2>
-    <img src="@Model.Rock.Locations.LastOrDefault().LocationImage"/>
+    <img src="@Model.Rock.Locations.LastOrDefault().LocationImage" />
     <p>@Model.Rock.Locations.LastOrDefault().Lat</p>
     <p>@Model.Rock.Locations.LastOrDefault().Lng</p>
 
@@ -98,7 +108,77 @@
         </form>
 </div>
 
+    <div id="container"><div class="mapBox" id="map"></div></div>
+
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Rock.Id">Edit</a> |
 </div>
+
+@section scripts {
+<script>
+    const map_url = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDxEiiPssDguXJXixsSljlWov1JZjpt3fk&callback=initMap&signed_in=true&language=';
+
+    var url = 'https://localhost:44366/Rock/getrocklocation/' + @Model.Rock.Id;
+
+    document.addEventListener('DOMContentLoaded', function (){
+    if (document.querySelectorAll('#map').length > 0) 
+    {
+        if (document.querySelector('html').lang)
+            lang = document.querySelector('html').lang;
+        else
+            lang = 'en';
+            
+        var js_file = document.createElement('script');
+        js_file.type = 'text/javascript';
+        js_file.src = `${map_url}` + lang;
+        document.getElementsByTagName('head')[0].appendChild(js_file);
+            
+    }
+});
+
+
+    var map;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 41.47463327829468, lng: -81.78872226820937 },
+            zoom: 10
+        });
+
+        //fetch(url)
+        //    .then(function (response) { return response.json() })
+        //    .then(plotMarkers);
+    }
+
+    var markers;
+    var bounds;
+
+  
+    //function plotMarkers(m) {
+    //    markers = [];
+    //    bounds = new google.maps.LatLngBounds();
+
+    //        console.log(m);
+    //    m.forEach(function (marker) {
+    //        var position = new google.maps.LatLng(marker.Lat, marker.Lng,);
+
+    //        markers.push(
+    //            new google.maps.Marker({
+    //                position: position,
+    //                map: map,
+    //                //icon: icon,
+    //                animation: google.maps.Animation.BOUNCE
+    //            })
+    //        );
+
+    //        bounds.extend(position);
+    //    });
+
+    //    map.fitBounds(bounds);
+
+    //}
+
+    
+</script>
+}

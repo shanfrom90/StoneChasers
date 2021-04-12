@@ -17,6 +17,8 @@ namespace Sailing_Rocks.Models
         public string Lng { get; set; }
 
         public int RockId { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore]
+
         public virtual Rock rock { get; set; }
 
         [Display(Name = "Located On:")]

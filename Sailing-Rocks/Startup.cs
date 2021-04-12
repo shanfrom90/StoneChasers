@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Sailing_Rocks.Repository;
+using Newtonsoft.Json;
 
 
 namespace Sailing_Rocks
@@ -30,11 +31,16 @@ namespace Sailing_Rocks
             services.AddSession();
             services.AddMvc();
             services.AddDbContext<SailingRocksContext>();
+            services.AddControllers().AddNewtonsoftJson(o =>
+            {
+                o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
             services.AddControllersWithViews();
             services.AddScoped<IRepository<User>, UserRepository>();
             services.AddScoped<IRepository<Rock>, RockRepository>();
             services.AddScoped<IRepository<Location>, LocationRepository>();
             services.AddScoped<IRepository<UserRock>, UserRockRepository>();
+            
             
         }
 
