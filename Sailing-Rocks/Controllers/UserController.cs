@@ -92,7 +92,7 @@ namespace Sailing_Rocks.Controllers
                 //add session
                 HttpContext.Session.SetString("Username", response.User.UserName);
 
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
