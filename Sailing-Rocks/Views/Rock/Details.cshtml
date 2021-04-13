@@ -2,6 +2,13 @@
 
 @{
     ViewData["Title"] = "Details";
+
+<style>
+    #map{
+        height: 600px;
+        width: 100%;
+    }
+</style>
 }
 
 <h1>Rock Details</h1>
@@ -142,42 +149,49 @@
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 41.47463327829468, lng: -81.78872226820937 },
+            center: { lat: parseFloat(41.47463327829468), lng: parseFloat(-81.78872226820937) },
             zoom: 10
         });
 
-        //fetch(url)
-        //    .then(function (response) { return response.json() })
-        //    .then(plotMarkers);
+        fetch(url)
+            .then(function (response) { return response.json() })
+            .then(plotMarkers);
     }
 
     var markers;
     var bounds;
 
   
-    //function plotMarkers(m) {
-    //    markers = [];
-    //    bounds = new google.maps.LatLngBounds();
+    function plotMarkers(m) {
+        markers = [];
+        bounds = new google.maps.LatLngBounds();
 
-    //        console.log(m);
-    //    m.forEach(function (marker) {
-    //        var position = new google.maps.LatLng(marker.Lat, marker.Lng,);
+        console.log(m);
+        console.log(typeof m);
 
-    //        markers.push(
-    //            new google.maps.Marker({
-    //                position: position,
-    //                map: map,
-    //                //icon: icon,
-    //                animation: google.maps.Animation.BOUNCE
-    //            })
-    //        );
+        var map_json = JSON.parse(m);
 
-    //        bounds.extend(position);
-    //    });
 
-    //    map.fitBounds(bounds);
+        map_json.forEach(function (marker) {
+            //console.log(marker.Lat);
+            //console.log(marker.Lng);
+            var position = new google.maps.LatLng(marker.Lat, marker.Lng);
 
-    //}
+            markers.push(
+                new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    //icon: icon,
+                    animation: google.maps.Animation.BOUNCE
+                })
+            );
+
+            bounds.extend(position);
+        });
+
+        map.fitBounds(bounds);
+
+    }
 
     
 </script>
