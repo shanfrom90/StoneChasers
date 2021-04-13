@@ -68,6 +68,16 @@ namespace Sailing_Rocks
                     RockId = 1,
                     UserId = 1
                 }
+
+            );
+            modelBuilder.Entity<Review>().HasData(
+                new Review()
+                {
+                    Id = 1,
+                    Content = "We found a rock.",
+                    Title = "Sturdy",
+                    RockId = 1
+                }
             );
 
 

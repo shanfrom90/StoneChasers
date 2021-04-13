@@ -44,9 +44,11 @@ namespace Sailing_Rocks
             services.AddScoped<IRepository<Rock>, RockRepository>();
             services.AddScoped<IRepository<Location>, LocationRepository>();
             services.AddScoped<IRepository<UserRock>, UserRockRepository>();
+            services.AddScoped<IRepository<Review>, ReviewRepository>();
 
-            
-            
+
+
+
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
