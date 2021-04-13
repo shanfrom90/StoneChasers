@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Session;
+using Newtonsoft.Json;
 
 namespace Sailing_Rocks.Controllers
 {
@@ -73,6 +74,19 @@ namespace Sailing_Rocks.Controllers
         {
             rockRepo.Update(model);
             return View(model);
+        }
+
+        public JsonResult GetRockLocation(int id)
+        {
+            var rock = rockRepo.GetById(id);
+
+            return Json(JsonConvert.SerializeObject(rock.Locations, new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            }));
+            
+
+
         }
 
         //users do not have ability to delete rocks
