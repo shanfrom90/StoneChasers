@@ -48,7 +48,7 @@ namespace Sailing_Rocks.Repositories
 
         public Rock GetRockBySerial(string serial)
         {
-            return db.Set<Rock>().Where(r => r.Serial == serial).FirstOrDefault();
+            return db.Set<Rock>().Include("Locations").Where(r => r.Serial == serial).FirstOrDefault();
         }
 
         public LoginResult CheckLogin(string username, string password)

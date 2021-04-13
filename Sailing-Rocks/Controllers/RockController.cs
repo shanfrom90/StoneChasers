@@ -84,9 +84,16 @@ namespace Sailing_Rocks.Controllers
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             }));
-            
+        }
 
+        public JsonResult GetRockLocationBySerial(string serial)
+        {
+            var rock = rockRepo.GetRockBySerial(serial);
 
+            return Json(JsonConvert.SerializeObject(rock.Locations, new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            }));
         }
 
         //users do not have ability to delete rocks
