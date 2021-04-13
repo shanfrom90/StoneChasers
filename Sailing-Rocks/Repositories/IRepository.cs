@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sailing_Rocks.Repository
 {
-    public interface IRepository<T> : ISelectList where T : class
+    public interface IRepository<T> : ISelectList, IAccount where T : class
     {
         IEnumerable<T> GetAll();
         T GetById(int id);

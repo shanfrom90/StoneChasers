@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Sailing_Rocks.Models;
 using Sailing_Rocks.Repository;
 using System;
@@ -33,7 +34,7 @@ namespace Sailing_Rocks.Controllers
 
             ViewBag.Result = "You've successfuly created your profile. You Rock!";
 
-            return RedirectToAction("Details", "User" , new {id = model.Id}); 
+            return RedirectToAction("Login", "User"/*, new { id = model.Id }*/);
         }
 
         public ViewResult Details(int id)
@@ -75,6 +76,36 @@ namespace Sailing_Rocks.Controllers
 
             return RedirectToAction("Create");
         }
-                        
+
+        public ViewResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(User model)
+        {
+            var response = userRepo.CheckLogin(model.UserName, model.Password);
+            if (response.Result)
+            {
+                //add session
+                HttpContext.Session.SetString("Username", response.User.UserName);
+                HttpContext.Session.SetString("UserId", response.User.Id.ToString());
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.ResultMessage = response.Message;
+                return View(model);
+            }
+        }
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
