@@ -17,7 +17,6 @@ namespace Sailing_Rocks.Models
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual ICollection<Location> Locations { get; set; }
         public virtual ICollection<UserRock> UserRocks { get; set; }
-        public virtual ICollection<Review> Reviews { get; set; }
 
 
 
