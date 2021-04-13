@@ -47,7 +47,9 @@ namespace Sailing_Rocks
                     Image = "https://thumbs.dreamstime.com/b/dwayne-johnson-80711565.jpg",
                     CreatedOn = DateTime.Now,
                     Serial = "testSerial",
-                    UserId = 1
+                    UserId = 1,
+                    Description = "Sturdy and easy to find"
+                    
                 }
                 );
             modelBuilder.Entity<Location>().HasData(
@@ -58,7 +60,9 @@ namespace Sailing_Rocks
                     Lng = "-81.65136941810817",
                     RockId = 1,
                     LocatedOn = DateTime.Now,
-                    LocationImage = "https://media-cdn.tripadvisor.com/media/photo-s/14/61/c4/4f/lighthouse-at-headlands.jpg"
+                    LocationImage = "https://media-cdn.tripadvisor.com/media/photo-s/14/61/c4/4f/lighthouse-at-headlands.jpg",
+                    LocationName = "Hollywood",
+                    Comment = "10/10 Would pick up again."
                 }
                 );
             modelBuilder.Entity<UserRock>().HasData(

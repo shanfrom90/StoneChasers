@@ -17,12 +17,16 @@
     <h4>@Model.Rock.Name</h4>
     <hr />
     <img src="@Model.Rock.Image" style="width: 25%;" alt="Content Photo">
+    <p>@Model.Rock.Description</p>
+
+    <hr />
 
     @foreach (var location in @Model.Rock.Locations)
     {
         <div class="Content">
-
+            <h4>@location.LocationName</h4>
             <img src="@location.LocationImage" alt="test" style="width: 25%;" >
+            <p>@location.Comment</p>
 
         </div>
     }
