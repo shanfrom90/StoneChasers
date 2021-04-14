@@ -14,6 +14,7 @@ namespace Sailing_Rocks.Repository
         void Create(T obj);
         void Delete(T obj);
         void Update(T obj);
+
         
 
     }

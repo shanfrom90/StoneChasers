@@ -47,8 +47,12 @@
         <input type="submit" value="Submit">
     </form>
 </div>
+<div class="Create">
+    <a asp-action="Create" asp-controller="Rock" asp-route-id="@Model.Id">Add a new rock!</a>
+</div>
+
 <div>
-    <a asp-action="Update" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Update"  asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a> |
     <a href="/Home/Index">Back to Home</a>
     @*<a asp-action="Index">Back to List</a>*@

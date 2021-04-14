@@ -12,5 +12,14 @@ namespace Sailing_Rocks.Helpers
             //implment encryption
             return password;
         }
+
+        public static string GenerateSerial(int length)
+        {
+            const string chars = "ABCDEFGHJKMNPQRTUVWXYZ2346789";
+
+            Random random = new Random();
+
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+        }
     }
 }
