@@ -12,6 +12,7 @@ namespace Sailing_Rocks.Models
         public string Image { get; set; }
         public DateTime CreatedOn { get; set; }
         public string Serial { get; set; }
+        public string Description { get; set; }
         public int UserId { get; set; }
         public virtual User User { get; set; }
         [System.Text.Json.Serialization.JsonIgnore]
