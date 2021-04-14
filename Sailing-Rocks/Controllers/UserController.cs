@@ -34,7 +34,7 @@ namespace Sailing_Rocks.Controllers
 
             ViewBag.Result = "You've successfuly created your profile. You Rock!";
 
-            return RedirectToAction("Login", "User"/*, new { id = model.Id }*/);
+            return RedirectToAction("Login", "User");
         }
 
         public ViewResult Details(int id)
@@ -88,16 +88,16 @@ namespace Sailing_Rocks.Controllers
             var response = userRepo.CheckLogin(model.UserName, model.Password);
             if (response.Result)
             {
-                //add session
-                HttpContext.Session.SetString("Username", response.User.UserName);
+                 
+                HttpContext.Session.SetString("UserName", response.User.UserName);
                 HttpContext.Session.SetString("UserId", response.User.Id.ToString());
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Details", "User", new { id = response.User.Id });
             }
             else
             {
                 ViewBag.ResultMessage = response.Message;
-                return View(model);
+                return RedirectToAction("Create", "User");
             }
         }
 
