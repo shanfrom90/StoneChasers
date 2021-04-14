@@ -3,6 +3,12 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
 }
 @section styles{ }
 
@@ -13,15 +19,15 @@
 
         <div class="container">
             @*<label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+                <input type="text" placeholder="Enter Username" name="uname" required>
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
 
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>*@
+                <button type="submit">Login</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>*@
 
             <label asp-for="UserName" class="control-label"></label>
             <input asp-for="UserName" class="form-control" />
@@ -42,16 +48,94 @@
     <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Create">Register New User</a>
 
     <hr />
-
-    <form>
-        <label for="rockSerial">Add a found rock!</label><br>
-        <input type="text" id="rockSerial" name="rockSerial" placeholder="Rock Serial Number"><br>
-        <input type="submit" value="Submit">
-    </form>
-
-
-
-
-
+    <div class="foundRock">
+            <label for="rockSerial">Add a found rock!</label><br>
+            <input type="text" id="rockSerial" name="rockSerial" placeholder="Rock Serial Number"><br>
+            <button type="submit" id="submitBtn">Submit</button>
+    </div>
+    <div id="container"><div class="mapBox" id="map"></div></div>
 
 </div>
+
+@section scripts {
+    <script>
+
+        const submitFormButton = document.querySelector(".foundRock button");
+        const map_url = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDxEiiPssDguXJXixsSljlWov1JZjpt3fk&callback=initMap&signed_in=true&language=';
+        const userInputSerial = document.getElementById("rockSerial");
+        var url = "https://localhost:44366/Rock/getrocklocationbyserial?serial=";
+        var markers;
+        var bounds;
+        var map;
+        //var inputValue;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: parseFloat(41.47463327829468), lng: parseFloat(-81.78872226820937) },
+                zoom: 10
+            });
+
+            
+            fetch(url)
+                .then(function (response) { return response.json() })
+                .then(plotMarkers);
+        }
+
+        function mapLocations() {
+            if (document.querySelectorAll('#map').length > 0) {
+                if (document.querySelector('html').lang)
+                    lang = document.querySelector('html').lang;
+                else
+                    lang = 'en';
+            var js_file = document.createElement('script');
+            js_file.type = 'text/javascript';
+            js_file.src = `${map_url}` + lang;
+            document.getElementsByTagName('head')[0].appendChild(js_file);
+            }
+         };
+
+        function plotMarkers(m) {
+            markers = [];
+            bounds = new google.maps.LatLngBounds();
+
+            console.log(m);
+            console.log(typeof m);
+                
+            var map_json = JSON.parse(m);
+
+            map_json.forEach(function (marker) {
+                //console.log(marker.Lat);
+                //console.log(marker.Lng);
+                var position = new google.maps.LatLng(marker.Lat, marker.Lng);
+
+                markers.push(
+                    new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        //icon: icon,
+                        animation: google.maps.Animation.BOUNCE
+                    })
+                );
+
+                bounds.extend(position);
+            });
+
+            map.fitBounds(bounds);
+
+        }
+
+
+        submitFormButton.addEventListener('click', function () {
+
+        const inputValue = userInputSerial.value;
+        url += inputValue;
+
+        mapLocations();
+
+        console.log(url);
+
+        //document.addEventListener('DOMContentLoaded', function (){
+    });
+       
+    </script>
+}
