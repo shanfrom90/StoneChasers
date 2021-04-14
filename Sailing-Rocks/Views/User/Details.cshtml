@@ -10,7 +10,9 @@
 <div>
     <h4>@Model.UserName</h4>
     <hr />
+    @if (!String.IsNullOrEmpty(Model.Image)){ 
     <img src="@Model.Image" style="width: 25%;" alt="Content Photo" />
+    }
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Hometown)

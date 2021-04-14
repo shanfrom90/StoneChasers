@@ -23,6 +23,13 @@ namespace Sailing_Rocks.Models
 
         [Display(Name = "Located On:")]
         public DateTime LocatedOn { get; set; }
+
+        [Display(Name = "Location Name:")]
+        public string LocationName { get; set; }
+        
+        public string Comment { get; set; }
+
+        [Display(Name = "Location Image:")]
         public string LocationImage { get; set; }
 
         public Location()

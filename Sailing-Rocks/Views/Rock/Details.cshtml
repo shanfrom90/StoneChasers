@@ -13,16 +13,20 @@
 
 <h1>Rock Details</h1>
 
-<div>
+<div alt="Content Photo">
     <h4>@Model.Rock.Name</h4>
     <hr />
     <img src="@Model.Rock.Image" style="width: 25%;" alt="Content Photo">
+    <p>@Model.Rock.Description</p>
+
+    <hr />
 
     @foreach (var location in @Model.Rock.Locations)
     {
         <div class="Content">
-            
-            <img src="@location.LocationImage" style="width: 25%;" alt="Content Photo">
+            <h4>@location.LocationName</h4>
+            <img src="@location.LocationImage" alt="test" style="width: 25%;" >
+            <p>@location.Comment</p>
 
         </div>
     }
@@ -66,7 +70,7 @@
             <p>@rockFriend.User.FirstName</p>
             <p>@rockFriend.User.LastName</p>
             <p>@rockFriend.User.UserName</p>
-            <img src="@rockFriend.User.Image" style="width: 25%;" alt="Content Photo">
+           <img src="@rockFriend.User.Image" style="width: 25%;" alt="user profile picture">
 
         </div>
     }
@@ -80,9 +84,11 @@
         }*@
     <h2>Last Seen Here:</h2>
     <img src="@Model.Rock.Locations.LastOrDefault().LocationImage" />
+    <p>@Model.Rock.Locations.LastOrDefault().LocationName</p>
+    <p>@Model.Rock.Locations.LastOrDefault().Comment</p>
     <p>@Model.Rock.Locations.LastOrDefault().Lat</p>
     <p>@Model.Rock.Locations.LastOrDefault().Lng</p>
- 
+
 </div>
     <h3>Add a New Location</h3>
     <div class="col-md-4">
@@ -90,19 +96,31 @@
             <input asp-for="Location.RockId" type="hidden" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Location.LocationName" class="control-label"></label>
+                <input asp-for="Location.LocationName" class="form-control" />
+                <span asp-validation-for="Location.LocationName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
                 <label asp-for="Location.Lat" class="control-label"></label>
-                <input asp-for="Location.Lat" class="form-control" />
+                <input type="number" asp-for="Location.Lat" class="form-control" />
                 <span asp-validation-for="Location.Lat" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Location.Lng" class="control-label"></label>
-                <input asp-for="Location.Lng" class="form-control" />
+                <input type="number" asp-for="Location.Lng" class="form-control" />
                 <span asp-validation-for="Location.Lng" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Location.LocationImage" class="control-label"></label>
                 <input asp-for="Location.LocationImage" class="form-control" />
                 <span asp-validation-for="Location.LocationImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location.Comment" class="control-label"></label>
+                <input asp-for="Location.Comment" class="form-control" />
+                <span asp-validation-for="Location.Comment" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Location.LocatedOn" class="control-label"></label>

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sailing_Rocks;
 
 namespace Sailing_Rocks.Migrations
 {
     [DbContext(typeof(SailingRocksContext))]
-    partial class SailingRocksContextModelSnapshot : ModelSnapshot
+    [Migration("20210413154653_addedReview")]
+    partial class addedReview
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,9 +28,6 @@ namespace Sailing_Rocks.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Lat")
                         .HasColumnType("nvarchar(max)");
 
@@ -39,9 +38,6 @@ namespace Sailing_Rocks.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LocationImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LocationName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RockId")
@@ -59,9 +55,41 @@ namespace Sailing_Rocks.Migrations
                             Id = 1,
                             Lat = "41.52906515532968",
                             Lng = "-81.65136941810817",
-                            LocatedOn = new DateTime(2021, 4, 13, 13, 34, 58, 287, DateTimeKind.Local).AddTicks(1810),
+                            LocatedOn = new DateTime(2021, 4, 13, 11, 46, 52, 885, DateTimeKind.Local).AddTicks(4527),
                             LocationImage = "https://media-cdn.tripadvisor.com/media/photo-s/14/61/c4/4f/lighthouse-at-headlands.jpg",
                             RockId = 1
+                        });
+                });
+
+            modelBuilder.Entity("Sailing_Rocks.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RockId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RockId");
+
+                    b.ToTable("Review");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "We found a rock.",
+                            RockId = 1,
+                            Title = "Sturdy"
                         });
                 });
 
@@ -97,7 +125,7 @@ namespace Sailing_Rocks.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2021, 4, 13, 13, 34, 58, 286, DateTimeKind.Local).AddTicks(6891),
+                            CreatedOn = new DateTime(2021, 4, 13, 11, 46, 52, 885, DateTimeKind.Local).AddTicks(5),
                             Image = "https://thumbs.dreamstime.com/b/dwayne-johnson-80711565.jpg",
                             Name = "Dwyane",
                             Serial = "testSerial",
@@ -150,7 +178,7 @@ namespace Sailing_Rocks.Migrations
                         {
                             Id = 1,
                             Bio = "Software Developer",
-                            CreatedOn = new DateTime(2021, 4, 13, 13, 34, 58, 278, DateTimeKind.Local).AddTicks(7944),
+                            CreatedOn = new DateTime(2021, 4, 13, 11, 46, 52, 877, DateTimeKind.Local).AddTicks(6580),
                             Email = "jkepic19@gmail.com",
                             FirstName = "Jason",
                             Hometown = "Parma, OH",
@@ -195,6 +223,15 @@ namespace Sailing_Rocks.Migrations
                 {
                     b.HasOne("Sailing_Rocks.Models.Rock", "rock")
                         .WithMany("Locations")
+                        .HasForeignKey("RockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Sailing_Rocks.Models.Review", b =>
+                {
+                    b.HasOne("Sailing_Rocks.Models.Rock", "Rock")
+                        .WithMany("Reviews")
                         .HasForeignKey("RockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
