@@ -41,13 +41,13 @@ namespace Sailing_Rocks.Controllers
             var UserId =  HttpContext.Session.GetString("UserId");
             
 
-            return View(new Rock() { UserId = Convert.ToInt32(UserId) });
+            return View(new Rock() { UserId = Convert.ToInt32(UserId), CreatedOn = DateTime.Now });
         }
 
         // POST: RockController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Rock model)
+        public ViewResult Create(Rock model)
         {
             model.Serial = Helper.GenerateSerial(8);
             rockRepo.Create(model);
