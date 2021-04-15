@@ -49,7 +49,7 @@ namespace Sailing_Rocks.Controllers
         [ValidateAntiForgeryToken]
         public ViewResult Create(Rock model)
         {
-            model.Serial = Helper.GenerateSerial(8);
+            model.Serial = rockRepo.GenerateSerial(8);
             rockRepo.Create(model);
             return View(new Rock());
         }

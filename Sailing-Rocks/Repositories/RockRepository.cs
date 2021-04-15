@@ -12,6 +12,7 @@ namespace Sailing_Rocks.Repositories
         public RockRepository(SailingRocksContext db) : base(db)
         {
 
+
         }
 
     }

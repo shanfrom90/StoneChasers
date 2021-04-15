@@ -66,6 +66,31 @@ namespace Sailing_Rocks.Repositories
 
         }
 
-        
+        public string GenerateSerial(int length)
+        {
+            
+            const string chars = "ABCDEFGHJKMNPQRTUVWXYZ2346789";
+
+            Random random = new Random();
+            int n = 0;
+
+            string serial = new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+
+            while (db.Set<Rock>().Include("Locations").Where(r => r.Serial == serial).FirstOrDefault() != null && n < 1000)
+            {
+                
+                serial = new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+                n++;
+            }
+
+            if (n == 1000) 
+            {
+                return null;
+            }
+
+            return serial;
+        }
+
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Sailing_Rocks.Repositories;
 
 namespace Sailing_Rocks.Helpers
 {
@@ -13,13 +14,6 @@ namespace Sailing_Rocks.Helpers
             return password;
         }
 
-        public static string GenerateSerial(int length)
-        {
-            const string chars = "ABCDEFGHJKMNPQRTUVWXYZ2346789";
-
-            Random random = new Random();
-
-            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
-        }
+        
     }
 }
