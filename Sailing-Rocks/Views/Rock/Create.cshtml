@@ -11,7 +11,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
-            <input type="hidden" value="@ViewBag.UserId" />
+            <input type="hidden" asp-for="UserId" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
+                <input @*type="file" accept="image/*"*@ asp-for="Image" class="form-control" />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -33,11 +33,11 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
+            <div class="form-group">
             <label asp-for="Serial" class="control-label"></label>
-            <input asp-for="Serial" class="form-control" />
+            <input asp-for="Serial" class="form-control" type="hidden"/>
             <span asp-validation-for="Serial" class="text-danger"></span>
-        </div>*@
+        </div>
             @*<div class="form-group">
             <label asp-for="UserId" class="control-label"></label>
             <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
@@ -50,7 +50,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-controller="Rock">Back to Home</a>
 </div>
 
 @section Scripts {

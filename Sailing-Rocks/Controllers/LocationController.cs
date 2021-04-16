@@ -49,7 +49,7 @@ namespace Sailing_Rocks.Controllers
             //list of rocks
             locationRepo.Create(model.Location);
            
-            return RedirectToAction("Details", "Rock", new {id = model.Location.RockId});
+            return RedirectToAction("Details", "Rock", new {id = model.Location.RockId, LocatedOn = DateTime.Now});
             
         }
 

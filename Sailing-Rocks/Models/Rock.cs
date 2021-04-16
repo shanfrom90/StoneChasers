@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,8 +10,11 @@ namespace Sailing_Rocks.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [RegularExpression("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")]
         public string Image { get; set; }
         public DateTime CreatedOn { get; set; }
+       
         public string Serial { get; set; }
         public string Description { get; set; }
         public int UserId { get; set; }

@@ -30,7 +30,9 @@ namespace Sailing_Rocks.Models
         public string Comment { get; set; }
 
         [Display(Name = "Location Image:")]
+        [RegularExpression("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")]
         public string LocationImage { get; set; }
+
 
         public Location()
         {

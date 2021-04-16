@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sailing_Rocks;
 
 namespace Sailing_Rocks.Migrations
 {
     [DbContext(typeof(SailingRocksContext))]
-    partial class SailingRocksContextModelSnapshot : ModelSnapshot
+    [Migration("20210414184008_Description")]
+    partial class Description
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,7 +62,7 @@ namespace Sailing_Rocks.Migrations
                             Comment = "10/10 Would pick up again.",
                             Lat = "41.52906515532968",
                             Lng = "-81.65136941810817",
-                            LocatedOn = new DateTime(2021, 4, 15, 14, 15, 14, 916, DateTimeKind.Local).AddTicks(1675),
+                            LocatedOn = new DateTime(2021, 4, 14, 14, 40, 7, 248, DateTimeKind.Local).AddTicks(2009),
                             LocationImage = "https://media-cdn.tripadvisor.com/media/photo-s/14/61/c4/4f/lighthouse-at-headlands.jpg",
                             LocationName = "Hollywood",
                             RockId = 1
@@ -102,7 +104,7 @@ namespace Sailing_Rocks.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2021, 4, 15, 14, 15, 14, 915, DateTimeKind.Local).AddTicks(3232),
+                            CreatedOn = new DateTime(2021, 4, 14, 14, 40, 7, 247, DateTimeKind.Local).AddTicks(3966),
                             Description = "Sturdy and easy to find",
                             Image = "https://thumbs.dreamstime.com/b/dwayne-johnson-80711565.jpg",
                             Name = "Dwyane",
@@ -156,7 +158,7 @@ namespace Sailing_Rocks.Migrations
                         {
                             Id = 1,
                             Bio = "Software Developer",
-                            CreatedOn = new DateTime(2021, 4, 15, 14, 15, 14, 908, DateTimeKind.Local).AddTicks(500),
+                            CreatedOn = new DateTime(2021, 4, 14, 14, 40, 7, 238, DateTimeKind.Local).AddTicks(5993),
                             Email = "jkepic19@gmail.com",
                             FirstName = "Jason",
                             Hometown = "Parma, OH",

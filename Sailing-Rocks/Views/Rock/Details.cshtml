@@ -82,12 +82,19 @@
             <p>@location.Lng</p>
 
         }*@
+    @if (Model.Rock.Locations.Count == 0)
+    {
+        <p>No Locations</p>
+    }
+    else
+    {
     <h2>Last Seen Here:</h2>
     <img src="@Model.Rock.Locations.LastOrDefault().LocationImage" />
     <p>@Model.Rock.Locations.LastOrDefault().LocationName</p>
     <p>@Model.Rock.Locations.LastOrDefault().Comment</p>
     <p>@Model.Rock.Locations.LastOrDefault().Lat</p>
     <p>@Model.Rock.Locations.LastOrDefault().Lng</p>
+    }
 
 </div>
     <h3>Add a New Location</h3>
@@ -104,12 +111,14 @@
 
             <div class="form-group">
                 <label asp-for="Location.Lat" class="control-label"></label>
-                <input type="number" asp-for="Location.Lat" class="form-control" />
+                <input type="number" min="-90" max="90" step="0.000000000000001"
+ asp-for="Location.Lat" class="form-control" />
                 <span asp-validation-for="Location.Lat" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Location.Lng" class="control-label"></label>
-                <input type="number" asp-for="Location.Lng" class="form-control" />
+                <input type="number" min="-180" max="180" step="0.000000000000001"
+ asp-for="Location.Lng" class="form-control" />
                 <span asp-validation-for="Location.Lng" class="text-danger"></span>
             </div>
             <div class="form-group">

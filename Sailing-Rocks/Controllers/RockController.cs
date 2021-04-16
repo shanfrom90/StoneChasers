@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Session;
 using Newtonsoft.Json;
+using Sailing_Rocks.Helpers;
 
 namespace Sailing_Rocks.Controllers
 {
@@ -35,18 +36,20 @@ namespace Sailing_Rocks.Controllers
         }
 
         // GET: RockController/Create
-        public ViewResult Create(int userId) { 
-        
-            ViewBag.UserId = HttpContext.Session.GetInt32("userId");
-          
-            return View();
+        public ViewResult Create() {
+
+            var UserId =  HttpContext.Session.GetString("UserId");
+            
+
+            return View(new Rock() { UserId = Convert.ToInt32(UserId), CreatedOn = DateTime.Now });
         }
 
         // POST: RockController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Rock model)
+        public ViewResult Create(Rock model)
         {
+            model.Serial = rockRepo.GenerateSerial(8);
             rockRepo.Create(model);
             return View(new Rock());
         }
