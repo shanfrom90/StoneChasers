@@ -34,7 +34,7 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-            <label asp-for="Serial" class="control-label"></label>
+            @*<label asp-for="Serial" class="control-label"></label>*@
             <input asp-for="Serial" class="form-control" type="hidden"/>
             <span asp-validation-for="Serial" class="text-danger"></span>
         </div>
@@ -50,7 +50,7 @@
 </div>
 
 <div>
-    <a asp-action="Index" asp-controller="Rock">Back to Home</a>
+    <a asp-action="Details" asp-controller="User">Back to Profile</a>
 </div>
 
 @section Scripts {

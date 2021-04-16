@@ -47,18 +47,18 @@ namespace Sailing_Rocks.Controllers
         // POST: RockController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ViewResult Create(Rock model)
+        public ActionResult Create(Rock model)
         {
             model.Serial = rockRepo.GenerateSerial(8);
             rockRepo.Create(model);
-            return View(new Rock());
+            return RedirectToAction("Details", "Rock", new { id = model.Id });
         }
 
         // GET: RockController/Edit/5
         public ActionResult Edit(int id)
         {
             var rock = rockRepo.GetById(id);
-            var UserId = HttpContext.Session.GetInt32("userId");
+            var UserId = Int32.Parse(HttpContext.Session.GetString("UserId"));
             if(rock.UserId == UserId)
             {
                 return View(rock);
