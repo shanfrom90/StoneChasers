@@ -9,15 +9,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Session;
 using Newtonsoft.Json;
 using Sailing_Rocks.Helpers;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace Sailing_Rocks.Controllers
 {
     public class RockController : Controller
     {
+        private readonly IWebHostEnvironment _hostEnvironment;
+
         IRepository<Rock> rockRepo;
-        public RockController(IRepository<Rock> rockRepo)
+        public RockController(IRepository<Rock> rockRepo, IWebHostEnvironment hostEnviroment)
         {
             this.rockRepo = rockRepo;
+            this._hostEnvironment = hostEnviroment;
         }
 
         //we are not displaying and index of rocks
@@ -49,6 +54,16 @@ namespace Sailing_Rocks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Rock model)
         {
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+            string extension = Path.GetExtension(model.ImageFile.FileName);
+            model.Image = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            model.Image = "/ContentImages/" + model.Image;
+            string path = Path.Combine(wwwRootPath + "/ContentImages", fileName);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                model.ImageFile.CopyTo(fileStream);
+            }
             model.Serial = rockRepo.GenerateSerial(8);
             rockRepo.Create(model);
             return RedirectToAction("Details", "Rock", new { id = model.Id });
