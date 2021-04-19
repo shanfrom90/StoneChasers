@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sailing_Rocks.Models;
 using Sailing_Rocks.Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,10 +14,12 @@ namespace Sailing_Rocks.Controllers
    
     public class LocationController : Controller
     {
+        private readonly IWebHostEnvironment _hostEnvironment;
         IRepository<Location> locationRepo;
-        public LocationController(IRepository<Location> locationRepo)
+        public LocationController(IRepository<Location> locationRepo, IWebHostEnvironment hostEnvironment)
         {
             this.locationRepo = locationRepo;
+            this._hostEnvironment = hostEnvironment;
         }
         // GET: LocationController
         public ActionResult Index()
@@ -36,7 +40,7 @@ namespace Sailing_Rocks.Controllers
         // GET: LocationController/Create
         public ViewResult Create()
         {   
-            //may need list of rocks?
+           
             return View(new Location());
         }
 
@@ -46,7 +50,17 @@ namespace Sailing_Rocks.Controllers
         public ActionResult Create(RockLocationVM model)
         {
 
-            //list of rocks
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+            string extension = Path.GetExtension(model.ImageFile.FileName);
+            model.Location.LocationImage = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            model.Location.LocationImage = "/ContentImages/" + model.Location.LocationImage;
+            string path = Path.Combine(wwwRootPath + "/ContentImages", fileName);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                model.ImageFile.CopyTo(fileStream);
+            }
+
             locationRepo.Create(model.Location);
            
             return RedirectToAction("Details", "Rock", new {id = model.Location.RockId, LocatedOn = DateTime.Now});
@@ -57,7 +71,7 @@ namespace Sailing_Rocks.Controllers
         public ActionResult Edit(int id)
         {
             var location = locationRepo.GetById(id);
-            //list of rocks
+           
             return View(location);
         }
 
@@ -65,7 +79,7 @@ namespace Sailing_Rocks.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Location model)
-        { //list of rocks
+        { 
             locationRepo.Update(model);
             ViewBag.Result = "You hae successfully edited this location";
             return View(model);

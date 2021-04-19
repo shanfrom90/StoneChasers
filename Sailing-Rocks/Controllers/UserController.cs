@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sailing_Rocks.Models;
 using Sailing_Rocks.Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,13 +13,16 @@ namespace Sailing_Rocks.Controllers
 {
     public class UserController : Controller
     {
+        private readonly IWebHostEnvironment _hostEnvironment;
 
         IRepository<User> userRepo;
 
-        public UserController(IRepository<User> userRepo)
+        public UserController(IRepository<User> userRepo, IWebHostEnvironment hostEnvironment)
         {
             this.userRepo = userRepo;
-            
+            this._hostEnvironment = hostEnvironment;
+
+
         }
 
         public ViewResult Create()
@@ -28,6 +33,17 @@ namespace Sailing_Rocks.Controllers
         [HttpPost]
         public ActionResult Create(User model)
         {
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+            string extension = Path.GetExtension(model.ImageFile.FileName);
+            model.Image = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            model.Image = "/ContentImages/" + model.Image;
+            string path = Path.Combine(wwwRootPath + "/ContentImages", fileName);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                model.ImageFile.CopyTo(fileStream);
+            }
+
             model.CreatedOn = DateTime.Now;
 
             userRepo.Create(model);
@@ -56,6 +72,17 @@ namespace Sailing_Rocks.Controllers
         [HttpPost]
         public ActionResult Update(User model)
         {
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+            string extension = Path.GetExtension(model.ImageFile.FileName);
+            model.Image = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            model.Image = "/ContentImages/" + model.Image;
+            string path = Path.Combine(wwwRootPath + "/ContentImages", fileName);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                model.ImageFile.CopyTo(fileStream);
+            }
+
             userRepo.Update(model);
 
             ViewBag.Result = "You have updated your profile.";
