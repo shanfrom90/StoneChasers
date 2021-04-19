@@ -8,10 +8,12 @@
 <h1>Profile</h1>
 
 <div>
+    <p class="text-danger">@ViewBag.message</p>
     <h4>@Model.UserName</h4>
     <hr />
-    @if (!String.IsNullOrEmpty(Model.Image)){ 
-    <img src="@Model.Image" style="width: 25%;" alt="Content Photo" />
+    @if (!String.IsNullOrEmpty(Model.Image))
+    {
+        <img src="@Model.Image" style="width: 25%;" alt="Content Photo" />
     }
     <dl class="row">
         <dt class="col-sm-2">
@@ -41,19 +43,23 @@
             </div>
         }
     </section>
-    <form>
+    <div class="foundRock">
+        <form asp-action="FoundRock">
         <label for="rockSerial">Add a found rock!</label><br>
-        <input type="text" id="rockSerial" name="rockSerial" placeholder="Rock Serial Number"><br>
-        <input type="submit" value="Submit">
-    </form>
+        <input type="text" id="serial" name="serial" placeholder="Rock Serial Number"><br>
+        <button type="submit" id="submitBtn">Submit</button>
+        </form>
+    </div>
 </div>
 <div class="Create">
-    <a asp-action="Create" asp-controller="Rock" >Add a new rock!</a>
+    <a asp-action="Create" asp-controller="Rock">Add a new rock!</a>
 </div>
 
 <div>
-    <a asp-action="Update"  asp-route-id="@Model.Id">Edit Profile</a> |
+    <a asp-action="Update" asp-route-id="@Model.Id">Edit Profile</a> |
     <a asp-action="Delete" asp-route-id="@Model.Id">Delete Account</a> |
     <a asp-action="Index" asp-controller="Home">Back to Home</a>
 
 </div>
+
+

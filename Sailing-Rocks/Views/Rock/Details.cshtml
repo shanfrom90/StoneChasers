@@ -203,12 +203,13 @@
             //console.log(marker.Lat);
             //console.log(marker.Lng);
             var position = new google.maps.LatLng(marker.Lat, marker.Lng);
+            var icon = {                url: '/images/Rock1.png', // url                scaledSize: new google.maps.Size(150, 150), // scaled size                origin: new google.maps.Point(0, 0), // origin                anchor: new google.maps.Point(0, 0) // anchor            };
 
             markers.push(
                 new google.maps.Marker({
                     position: position,
                     map: map,
-                    //icon: icon,
+                    icon: icon,
                     animation: google.maps.Animation.BOUNCE
                 })
             );

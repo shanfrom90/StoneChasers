@@ -37,8 +37,9 @@ namespace Sailing_Rocks.Controllers
             return RedirectToAction("Login", "User");
         }
 
-        public ViewResult Details()
+        public ViewResult Details(string? message)
         {
+            ViewBag.message = message;
             var UserId = HttpContext.Session.GetString("UserId");
             var user = userRepo.GetById(Convert.ToInt32(UserId));
 
@@ -106,6 +107,21 @@ namespace Sailing_Rocks.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult FoundRock(string serial)
+        {
+            var rock = userRepo.GetRockBySerial(serial);
+            if(rock != null)
+            {
+                var sessionUserId = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
+                userRepo.RockFound(rock.UserId, rock.Id, sessionUserId);
+            }
+            else
+            {
+                return RedirectToAction("Details", new { message="Rock not found." }); 
+            }
+            return RedirectToAction("Details", "Rock", rock);
         }
 
     }

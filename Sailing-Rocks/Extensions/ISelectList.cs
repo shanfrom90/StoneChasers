@@ -8,7 +8,7 @@ namespace Sailing_Rocks.Extensions
 {
     public interface ISelectList
     {
-        
+        void RockFound(int userId, int rockId, int sessionUserId);
 
         Rock GetRockBySerial(string serial);
          
