@@ -18,6 +18,7 @@ namespace Sailing_Rocks.Models
         public string Image { get; set; }
         [NotMapped]
         [DisplayName("Upload File")]
+        [Required]
         public IFormFile ImageFile { get; set; }
         public DateTime CreatedOn { get; set; }
        

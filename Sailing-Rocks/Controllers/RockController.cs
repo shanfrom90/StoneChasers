@@ -90,8 +90,19 @@ namespace Sailing_Rocks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Rock model)
         {
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+            string extension = Path.GetExtension(model.ImageFile.FileName);
+            model.Image = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            model.Image = "/ContentImages/" + model.Image;
+            string path = Path.Combine(wwwRootPath + "/ContentImages", fileName);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                model.ImageFile.CopyTo(fileStream);
+            }
+
             rockRepo.Update(model);
-            return View(model);
+            return RedirectToAction("Details", "Rock", new { id = model.Id });
         }
 
         public JsonResult GetRockLocation(int id)
