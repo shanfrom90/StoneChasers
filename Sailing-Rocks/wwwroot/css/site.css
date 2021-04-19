@@ -1,6 +1,14 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+/* Color Pallet 
+    242e36 dark grey
+    5A6069 med grey
+    828798 light grey
+    D9BEB0  peach
+    FbF9E9 Ivory
+*/
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -9,25 +17,37 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+  color: orangered;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  color: #FBF9E9;
+  background-color: #D9BEB0;
+  border-color: #242E36;
+  border-width: 2px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+button {
+    background-color: #D9BEB0;
+    color: #FBF9E9;
+    border-color: #242E36;
 }
+
+nav {
+    background-color: #ffd800;
+    border-color: #1861ac;
+}
+
+.nav-link {
+    color: red !important;
+
+}
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 @media (min-width: 768px) {
   html {
@@ -61,6 +81,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  background-color: grey;
 }
 .footer {
   position: absolute;
@@ -75,3 +96,7 @@ body {
     width: 100%;
 }
 
+
+nav {
+    background-color: green;
+}
