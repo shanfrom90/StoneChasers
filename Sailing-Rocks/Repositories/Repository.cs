@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Sailing_Rocks.Extensions;
 using Sailing_Rocks.Models;
 using Sailing_Rocks.Repository;
@@ -91,6 +92,12 @@ namespace Sailing_Rocks.Repositories
             return serial;
         }
 
-
+        public void RockFound(int userId, int rockId, int sessionUserId) 
+        {
+            var user = db.Set<User>().Find(sessionUserId);
+           
+            user.UserRocks.Add(new UserRock() { UserId = sessionUserId, RockId = rockId});
+            db.SaveChanges();
+        }
     }
 }
