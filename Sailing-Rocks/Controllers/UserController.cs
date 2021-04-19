@@ -37,9 +37,10 @@ namespace Sailing_Rocks.Controllers
             return RedirectToAction("Login", "User");
         }
 
-        public ViewResult Details(int id)
+        public ViewResult Details()
         {
-            var user = userRepo.GetById(id);
+            var UserId = HttpContext.Session.GetString("UserId");
+            var user = userRepo.GetById(Convert.ToInt32(UserId));
 
             return View(user);
         }
@@ -52,13 +53,13 @@ namespace Sailing_Rocks.Controllers
         }
 
         [HttpPost]
-        public ViewResult Update(User model)
+        public ActionResult Update(User model)
         {
             userRepo.Update(model);
 
             ViewBag.Result = "You have updated your profile.";
 
-            return View(model);
+            return RedirectToAction("Details","User");
         }
 
 
@@ -73,8 +74,8 @@ namespace Sailing_Rocks.Controllers
         public ActionResult Delete(User model)
         {
             userRepo.Delete(model);
-
-            return RedirectToAction("Create");
+            
+            return Logout();
         }
 
         public ViewResult Login()
