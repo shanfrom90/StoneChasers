@@ -34,6 +34,7 @@ namespace Sailing_Rocks.Models
 
         [Display(Name = "Location Image:")]
         [RegularExpression("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")]
+        [Required]
         public string LocationImage { get; set; }
 
 

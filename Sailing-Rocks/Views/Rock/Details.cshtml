@@ -138,6 +138,8 @@
             <label asp-for="ImageFile" class="control-label"></label>
             <input accept="image/*" asp-for="ImageFile" />
             <span asp-validation-for="ImageFile" class="text-danger"></span>
+            <div class="text-danger">@ViewBag.Error</div>
+
         </div>
         <div class="form-group">
             <label asp-for="Location.Comment" class="control-label"></label>

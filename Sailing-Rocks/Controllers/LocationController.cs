@@ -49,20 +49,27 @@ namespace Sailing_Rocks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(RockLocationVM model)
         {
-
             string wwwRootPath = _hostEnvironment.WebRootPath;
             string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
             string extension = Path.GetExtension(model.ImageFile.FileName);
-            model.Location.LocationImage = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            model.Location.LocationImage = "/ContentImages/" + model.Location.LocationImage;
-            string path = Path.Combine(wwwRootPath + "/ContentImages", fileName);
-            using (var fileStream = new FileStream(path, FileMode.Create))
+
+            if (Path.GetFileNameWithoutExtension(model.ImageFile.FileName) == null)
             {
-                model.ImageFile.CopyTo(fileStream);
+                ViewBag.Error = "Upload Needed";
+            }
+            else
+            {
+                model.Location.LocationImage = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                model.Location.LocationImage = "/ContentImages/" + model.Location.LocationImage;
+                string path = Path.Combine(wwwRootPath + "/ContentImages", fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    model.ImageFile.CopyTo(fileStream);
+                }
             }
 
+            
             locationRepo.Create(model.Location);
-           
             return RedirectToAction("Details", "Rock", new {id = model.Location.RockId, LocatedOn = DateTime.Now});
             
         }
