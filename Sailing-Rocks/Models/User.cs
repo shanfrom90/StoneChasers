@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Sailing_Rocks.Helpers;
 
 namespace Sailing_Rocks.Models
@@ -26,10 +29,14 @@ namespace Sailing_Rocks.Models
             }
         }
 
-
         //add a default image?
         [RegularExpression("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")]
         public string Image { get; set; }
+
+        [NotMapped]
+        [DisplayName("Upload File")]
+        [Required]
+        public IFormFile ImageFile { get; set; }
 
         public string Hometown { get; set; }
         public string Bio { get; set; }
