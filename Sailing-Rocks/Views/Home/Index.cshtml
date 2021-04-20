@@ -15,12 +15,12 @@
 <div class="text-center">
     <h1 class="display-4">Welcome Stone Chasers!</h1>
 
-    <div class="container">
-
+    
+    <div class="homeContent">
         @if (String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserId")))
         {
-            <div class="container">
-                <form asp-area="" asp-controller="User" asp-action="Login">
+            <div class="loginContainer">
+                <form class="loginForm" asp-area="" asp-controller="User" asp-action="Login">
                     <div asp-validation-summary="ModelOnly" class="text-danger">@ViewBag.ResultMessage</div>
                     <label asp-for="UserName" class="control-label"></label>
                     <input asp-for="UserName" class="form-control" />
@@ -33,37 +33,31 @@
 
                     <input type="submit" value="Login" class="btn btn-primary" />
                 </form>
+                @if (String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserId")))
+                {
+                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Create">Register New User</a>
+                }
             </div>
         }
 
-    </div>
 
-    <div class="container">
-        @*<button type="button" class="cancelbtn">Cancel</button>*@
-        @*<span class="psw">Forgot <a href="#">password?</a></span>*@
-    </div>
+        <hr />
 
 
 
+        <div class="foundRock">
+            <label for="rockSerial">Add a found rock!</label><br>
 
-    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Create">Register New User</a>
-
-    @if (String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserId")))
-    { 
-        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Create">Register New User</a>
-    }
-    <hr />
-    <div class="foundRock">
-        <label for="rockSerial">Add a found rock!</label><br>
-
-        <input type="text" id="rockSerial" name="rockSerial" placeholder="Rock Serial Number" />
-        <br />
-        <button type="submit" id="submitBtn">Submit</button>
+            <input type="text" id="rockSerial" name="rockSerial" placeholder="Rock Serial Number" />
+            <br />
+            <button type="submit" id="submitBtn">Submit</button>
+        </div>
     </div>
    
-        <div id="mapContainer"><div class="mapBox" id="map"></div></div>
+        <div id="mapContainer">
+    <div class="mapBox" id="map"></div></div>
   
-    </div>
+ </div>
 
 @section scripts {
     <script>

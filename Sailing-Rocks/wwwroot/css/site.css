@@ -20,7 +20,11 @@ a {
     color: #242e36;
 }
 
-.btn-primary {
+    a:hover {
+        font-weight: bold;
+    }
+
+/*.btn-primary {
     color: #242e36;
     background-color: #d9beb0;
     border-color: #242E36;
@@ -34,7 +38,41 @@ button {
     border-width: 2px;
     border-radius: .25rem;
     margin: 1em;
+}*/
+
+
+/*.btn, button {
+    
+}*/
+
+.btn, button {
+    background-image: linear-gradient(to right, #828798 0%, #fbf9e9 51%, #828798 100%);
+    background-color: none;
+    margin-top: 10px;
+    padding: 5px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border: solid 1px;
+    border-color: #242e36;
+    border-radius: 6px;
+    display: block;
+    font-weight: bold;
 }
+
+    .btn:hover, button:hover {
+        background-position: right center;
+        border: solid 1px;
+        border-color: #242e36; 
+        color: #242e36;
+        text-decoration: none;
+        font-weight: bold;
+    }
+         
+
 
 nav {
     background-color: #fbf9e9;
@@ -45,6 +83,10 @@ nav {
     color: #242e36 !important;
 }
 
+    .nav-link:hover {
+        color: #d9beb0 !important;
+        font-weight: bold;
+    }
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -102,6 +144,10 @@ body {
 #map {
     height: 600px;
     width: 100%;
+    margin-top: 2em;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0, .5);
+    transition: 0.5s;
 }
 
 .mainContainer{
@@ -110,18 +156,59 @@ body {
 
 main {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.homeContent {
+    display: flex;
     flex-direction: column;
-    align-content: space-around;
+    justify-content: center;
+    align-items: center;
+}
+    
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #fbf9e9;
     background-image: url(/images/asfalt-dark.png);
     padding: 2em 2em 4em 2em;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0, .5);
+    transition: 0.5s;
+    max-width: 60%;
+   
 }
 
-#mapContainer {
+.loginForm {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.foundRock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+    padding: 2em 2em 4em 2em;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0, .5);
+    transition: 0.5s;
+    max-width: 60%;
+}
+
+
+
+/*#mapContainer {
     padding: 1em;
     background-color: #d9beb0;
     background-image: url(/images/gravel.png);
-}
+}*/
 
 .Images {
     margin: 0 auto;
