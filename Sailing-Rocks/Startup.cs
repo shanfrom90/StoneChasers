@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Sailing_Rocks.Repository;
 
+
 using Newtonsoft.Json;
 
 
@@ -39,7 +40,7 @@ namespace Sailing_Rocks
             {
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation(); 
             services.AddScoped<IRepository<User>, UserRepository>();
             services.AddScoped<IRepository<Rock>, RockRepository>();
             services.AddScoped<IRepository<Location>, LocationRepository>();

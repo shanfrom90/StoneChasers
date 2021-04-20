@@ -28,6 +28,9 @@
                     <label asp-for="Password" class="control-label"></label>
                     <input type="password" asp-for="Password" class="form-control" />
                     <span asp-validation-for="Password" class="text-danger"></span>
+
+                    <br />
+
                     <input type="submit" value="Login" class="btn btn-primary" />
                 </form>
             </div>
@@ -41,6 +44,10 @@
     </div>
 
 
+
+
+    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Create">Register New User</a>
+
     @if (String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserId")))
     { 
         <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Create">Register New User</a>
@@ -48,12 +55,15 @@
     <hr />
     <div class="foundRock">
         <label for="rockSerial">Add a found rock!</label><br>
-        <input type="text" id="rockSerial" name="rockSerial" placeholder="Rock Serial Number"><br>
+
+        <input type="text" id="rockSerial" name="rockSerial" placeholder="Rock Serial Number" />
+        <br />
         <button type="submit" id="submitBtn">Submit</button>
     </div>
-    <div id="container"><div class="mapBox" id="map"></div></div>
-
-</div>
+   
+        <div id="mapContainer"><div class="mapBox" id="map"></div></div>
+  
+    </div>
 
 @section scripts {
     <script>
@@ -105,7 +115,12 @@
                 //console.log(marker.Lat);
                 //console.log(marker.Lng);
                 var position = new google.maps.LatLng(marker.Lat, marker.Lng, { zoom: 10 });
-                var icon = {                    url: '/images/Rock1.png', // url                    scaledSize: new google.maps.Size(150, 150), // scaled size                    origin: new google.maps.Point(0, 0), // origin                    anchor: new google.maps.Point(0, 0) // anchor                };
+                var icon = {
+                    url: '/images/Rock1.png', // url
+                    scaledSize: new google.maps.Size(150, 150), // scaled size
+                    origin: new google.maps.Point(0, 0), // origin
+                    anchor: new google.maps.Point(0, 0) // anchor
+                };
 
                 markers.push(
                     new google.maps.Marker({

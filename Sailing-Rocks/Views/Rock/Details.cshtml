@@ -1,4 +1,5 @@
-﻿@model Sailing_Rocks.Models.RockLocationVM
+
+@model Sailing_Rocks.Models.RockLocationVM
 
 @{
     ViewData["Title"] = "Details";
@@ -16,64 +17,58 @@
 <div alt="Content Photo">
     <h4>@Model.Rock.Name</h4>
     <hr />
-    <img src="@Model.Rock.Image" style="width: 25%;" alt="Content Photo">
-    <p>@Model.Rock.Description</p>
-
-    <hr />
-
-    @foreach (var location in @Model.Rock.Locations)
-    {
-        <div class="Content">
-            <h4>@location.LocationName</h4>
-            <img src="@location.LocationImage" alt="test" style="width: 25%;" >
-            <p>@location.Comment</p>
-
-        </div>
-    }
-
-    <dl class="row">
-        @*<dt class="col-sm-2">
+    <div class="rockDetails">
+        <img src="@Model.Rock.Image" style="width: auto; height: 315px;" alt="Content Photo">
+        <dl class="row">
+            @*<dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Rock.Name)
             </dt>*@
-        @*<dd class="col-sm-10">
+            @*<dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Rock.Name)
             </dd>*@
-        @*<dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Rock.Image)
-            </dt>*@
-        @*<dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Rock.Image)
-            </dd>*@
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Rock.CreatedOn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Rock.CreatedOn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Rock.Serial)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Rock.Serial)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Rock.User)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Rock.User.Id)
-        </dd>
-    </dl>
-    <h2>Friends of @Model.Rock.Name</h2>
-    @foreach (var rockFriend in Model.Rock.UserRocks)
-    {
-        <div class="Content">
-            <p>@rockFriend.User.FirstName</p>
-            <p>@rockFriend.User.LastName</p>
-            <p>@rockFriend.User.UserName</p>
-           <img src="@rockFriend.User.Image" style="width: 25%;" alt="user profile picture">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Rock.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Rock.Description)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Rock.CreatedOn)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Rock.CreatedOn)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Rock.Serial)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Rock.Serial)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Rock.User)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Rock.User.Id)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-controller="Rock" asp-route-id="@Model.Rock.Id">Edit Rock</a>
+    </div>
 
-        </div>
-    }
+    <h2>Friends of @Model.Rock.Name</h2>
+    <div class="Images">
+        @foreach (var rockFriend in Model.Rock.UserRocks)
+        {
+            <div class="Content">
+                <img src="@rockFriend.User.Image" alt="user profile picture">
+                <p>@rockFriend.User.FirstName</p>
+                <p>@rockFriend.User.LastName</p>
+                <p>@rockFriend.User.UserName</p>
+
+            </div>
+        }
+    </div>
 
     @*will display all locations*@
     @*@foreach (var location in Model.Rock.Locations)
@@ -82,18 +77,31 @@
             <p>@location.Lng</p>
 
         }*@
+    <h2>Places I Have Been</h2>
+    <div class="Images">
+        @foreach (var location in @Model.Rock.Locations)
+        {
+            <div class="Content">
+                <h4>@location.LocationName</h4>
+                <img src="@location.LocationImage" alt="test">
+                <p>@location.Comment</p>
+            </div>
+        }
+    </div>
     @if (Model.Rock.Locations.Count == 0)
     {
         <p>No Locations</p>
     }
     else
     {
-    <h2>Last Seen Here:</h2>
-    <img src="@Model.Rock.Locations.LastOrDefault().LocationImage" />
-    <p>@Model.Rock.Locations.LastOrDefault().LocationName</p>
-    <p>@Model.Rock.Locations.LastOrDefault().Comment</p>
-    <p>@Model.Rock.Locations.LastOrDefault().Lat</p>
-    <p>@Model.Rock.Locations.LastOrDefault().Lng</p>
+        <h2>Last Seen Here:</h2>
+        <div class="Content">
+            <img src="@Model.Rock.Locations.LastOrDefault().LocationImage" />
+            <p>@Model.Rock.Locations.LastOrDefault().LocationName</p>
+            <p>@Model.Rock.Locations.LastOrDefault().Comment</p>
+            <p>@Model.Rock.Locations.LastOrDefault().Lat</p>
+            <p>@Model.Rock.Locations.LastOrDefault().Lng</p>
+        </div>
     }
 
 </div>
@@ -142,32 +150,30 @@
         </form>
 </div>
 
-    <div id="container"><div class="mapBox" id="map"></div></div>
+    <div id="mapContainer"><div class="mapBox" id="map"></div></div>
 
 
-<div>
-    <a asp-action="Edit" asp-controller="Rock" asp-route-id="@Model.Rock.Id">Edit Rock</a> 
-</div>
+    
 
-@section scripts {
-<script>
+    @section scripts {
+        <script>
     const map_url = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDxEiiPssDguXJXixsSljlWov1JZjpt3fk&callback=initMap&signed_in=true&language=';
 
     var url = 'https://localhost:44366/Rock/getrocklocation/' + @Model.Rock.Id;
 
     document.addEventListener('DOMContentLoaded', function (){
-    if (document.querySelectorAll('#map').length > 0) 
+    if (document.querySelectorAll('#map').length > 0)
     {
         if (document.querySelector('html').lang)
             lang = document.querySelector('html').lang;
         else
             lang = 'en';
-            
+
         var js_file = document.createElement('script');
         js_file.type = 'text/javascript';
         js_file.src = `${map_url}` + lang;
         document.getElementsByTagName('head')[0].appendChild(js_file);
-            
+
     }
     });
 
@@ -188,7 +194,7 @@
     var markers;
     var bounds;
 
-  
+
     function plotMarkers(m) {
         markers = [];
         bounds = new google.maps.LatLngBounds();
@@ -203,7 +209,12 @@
             //console.log(marker.Lat);
             //console.log(marker.Lng);
             var position = new google.maps.LatLng(marker.Lat, marker.Lng);
-            var icon = {                url: '/images/Rock1.png', // url                scaledSize: new google.maps.Size(150, 150), // scaled size                origin: new google.maps.Point(0, 0), // origin                anchor: new google.maps.Point(0, 0) // anchor            };
+            var icon = {
+                url: '/images/Rock1.png', // url
+                scaledSize: new google.maps.Size(150, 150), // scaled size
+                origin: new google.maps.Point(0, 0), // origin
+                anchor: new google.maps.Point(0, 0) // anchor
+            };
 
             markers.push(
                 new google.maps.Marker({
@@ -221,6 +232,6 @@
 
     }
 
-    
-</script>
-}
+
+        </script>
+    }
