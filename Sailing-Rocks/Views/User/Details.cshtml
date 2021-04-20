@@ -11,55 +11,78 @@
     <p class="text-danger">@ViewBag.message</p>
     <h4>@Model.UserName</h4>
     <hr />
-    @if (!String.IsNullOrEmpty(Model.Image))
-    {
-        <img src="@Model.Image" style="width: 25%;" alt="Content Photo" />
-    }
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Hometown)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Hometown)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Bio)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Bio)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
-    </dl>
-    <section class="RockIndex">
+    <div class="profileContainer">
+        <div class="profileImage">
+            @if (!String.IsNullOrEmpty(Model.Image))
+            {
+                <img src="@Model.Image" style="width: auto; height: 315px;" alt="Content Photo" />
+            }
+        </div>
+        <div class="profileTable">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Hometown)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Hometown)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Bio)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Bio)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CreatedOn)
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <h4>Rocks You Have Made</h4>
+    <section class="Images">
         @foreach (var rock in Model.Rocks)
         {
             <div class="Content">
-                <a href="/Rock/Details/@rock.Id"><img src="@rock.Image" style="width: 25%;" alt="Rock Photo"></a>
+                <a href="/Rock/Details/@rock.Id"><img src="@rock.Image" alt="Rock Photo"></a>
             </div>
         }
     </section>
-    <div class="foundRock">
-        <form asp-action="FoundRock">
-        <label for="rockSerial">Add a found rock!</label><br>
-        <input type="text" id="serial" name="serial" placeholder="Rock Serial Number"><br>
-        <button type="submit" id="submitBtn">Submit</button>
-        </form>
+    <h4>Rocks You Have Found</h4>
+    <section class="Images">
+        <ul>
+            @foreach (var rock in Model.UserRocks)
+            {
+                <li>
+                    <div class="Content">
+                        <a href="/Rock/Details/@rock.Id">@rock.Rock.Name</a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </section>
+    <hr />
+    <div class="addRockContainter">
+        <div class="foundRock">
+            <a asp-action="Create" asp-controller="Rock">Add a new rock!</a>
+            <form asp-action="FoundRock">
+                <label for="rockSerial">Add a found rock!</label><br>
+                <input type="text" id="serial" name="serial" placeholder="Rock Serial Number"><br>
+                <button type="submit" id="submitBtn">Submit</button>
+            </form>
+        </div>
+
+        <div class="createRock">
+
+        </div>
     </div>
 </div>
-<div class="Create">
-    <a asp-action="Create" asp-controller="Rock">Add a new rock!</a>
-</div>
-
-<div>
+<div class="profileLinks">
     <a asp-action="Update" asp-route-id="@Model.Id">Edit Profile</a> |
     <a asp-action="Delete" asp-route-id="@Model.Id">Delete Account</a> |
     <a asp-action="Index" asp-controller="Home">Back to Home</a>
-
 </div>
 
 

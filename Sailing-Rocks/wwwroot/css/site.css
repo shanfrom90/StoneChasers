@@ -2,11 +2,11 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 /* Color Pallet 
-    242e36 dark grey
-    5A6069 med grey
-    828798 light grey
-    D9BEB0  peach
-    FbF9E9 Ivory
+    #242e36 dark grey
+    #5a6069 med grey
+    #828798 light grey
+    #d9beb0  peach
+    #fbf9e9 Ivory
 */
 
 a.navbar-brand {
@@ -17,30 +17,32 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-  color: orangered;
+    color: #242e36;
 }
 
 .btn-primary {
-  color: #FBF9E9;
-  background-color: #D9BEB0;
-  border-color: #242E36;
-  border-width: 2px;
+    color: #242e36;
+    background-color: #d9beb0;
+    border-color: #242E36;
+    border-width: 2px;
 }
 
 button {
-    background-color: #D9BEB0;
-    color: #FBF9E9;
+    background-color: #d9beb0;
+    color: #242e36;
     border-color: #242E36;
+    border-width: 2px;
+    border-radius: .25rem;
+    margin: 1em;
 }
 
 nav {
-    background-color: #ffd800;
-    border-color: #1861ac;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
 }
 
 .nav-link {
-    color: red !important;
-
+    color: #242e36 !important;
 }
 
 
@@ -56,10 +58,10 @@ html {
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #242E36;
 }
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #242E36;
 }
 
 .box-shadow {
@@ -74,21 +76,27 @@ button.accept-policy {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
+  color: #242e36;
   position: relative;
   min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  background-color: grey;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: #828798;
+    background-image: url(/images/concrete-wall-2.png);
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    margin-top: 2em;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 #map {
@@ -96,7 +104,104 @@ body {
     width: 100%;
 }
 
+.mainContainer{
+    padding: 4em 8em;
+}
 
-nav {
-    background-color: green;
+main {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+    padding: 2em 2em 4em 2em;
+}
+
+#mapContainer {
+    padding: 1em;
+    background-color: #d9beb0;
+    background-image: url(/images/gravel.png);
+}
+
+.Images {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 1em;
+    justify-content: space-around;
+}
+
+.Content {
+    margin: 1em;
+    /*padding: 1em;
+*/   /* background-color: #5a6069;
+    background-image: url(/images/gravel.png);*/
+    width: 320px;
+    border: 1px;
+    border-radius: .25px;
+    -moz-box-shadow: 0 0 10px #000000;
+    -webkit-box-shadow: 0 0 10px #000000;
+    box-shadow: 0 0 10px #000000;
+}
+.Content p {
+    padding-left: 1em;
+}
+
+.Content a {
+        padding-left: 1em;
+}
+img {
+    width: 320px;
+    height: auto;
+    
+}
+
+.profileContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 1em;
+}
+
+.profileTable dl dd {
+    padding-left: 10em;
+    padding-top: 1em;
+}
+
+.profileTable dl dt {
+    padding-left: 2em;
+    padding-top: 1em;
+}
+
+.addRockContainter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 1em;
+    justify-content: center;
+
+}
+
+.foundRock a {
+    margin: 1em;
+}
+
+.profileLinks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 1em;
+    justify-content: space-around;
+}
+
+.rockDetails {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 1em;
+}
+
+.rockDetails {
+    padding-left: 1em;
 }
