@@ -45,30 +45,34 @@
     <section class="Images">
         @foreach (var rock in Model.Rocks)
         {
-            <div class="Content">
-                <a href="/Rock/Details/@rock.Id"><img src="@rock.Image" alt="Rock Photo"></a>
-                <p>Serial Number: @rock.Serial</p>
-            </div>
+
+        <div class="Content">
+            <p>@rock.Serial</p>
+            <a href="/Rock/Details/@rock.Id"><img src="@rock.Image" alt="Rock Photo"></a>
+        </div>
+
         }
     </section>
     <h4>Rocks You Have Found</h4>
     <section class="Images">
-        <ul>
-            @foreach (var rock in Model.UserRocks)
-            {
-                <li>
-                    <div class="Content">
-                        <a href="/Rock/Details/@rock.Id">@rock.Rock.Name</a>
-                    </div>
-                </li>
-            }
-        </ul>
+        @foreach (var rock in Model.UserRocks)
+        {
+            <div class="Content">
+                <p>@rock.Rock.Serial</p>
+
+                @foreach (var location in rock.Rock.Locations)
+                {
+
+                    <a href="/Rock/Details/@rock.Id"><img src="@location.LocationImage" alt="Rock Photo"></a>
+                }
+            </div>
+        }
     </section>
     <hr />
     <div class="addRockContainter">
         <div class="foundRock">
             <a asp-action="Create" asp-controller="Rock">Add a new rock!</a>
-            <form asp-action="FoundRock">
+            <form class="foundRockForm"asp-action="FoundRock">
                 <label for="rockSerial">Add a found rock!</label><br>
                 <input type="text" id="serial" name="serial" placeholder="Rock Serial Number"><br>
                 <button type="submit" id="submitBtn">Submit</button>
