@@ -39,6 +39,7 @@ namespace Sailing_Rocks.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LocationImage")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LocationName")
@@ -60,7 +61,7 @@ namespace Sailing_Rocks.Migrations
                             Comment = "10/10 Would pick up again.",
                             Lat = "41.52906515532968",
                             Lng = "-81.65136941810817",
-                            LocatedOn = new DateTime(2021, 4, 19, 11, 56, 21, 854, DateTimeKind.Local).AddTicks(5931),
+                            LocatedOn = new DateTime(2021, 4, 21, 11, 13, 12, 64, DateTimeKind.Local).AddTicks(1774),
                             LocationImage = "https://media-cdn.tripadvisor.com/media/photo-s/14/61/c4/4f/lighthouse-at-headlands.jpg",
                             LocationName = "Hollywood",
                             RockId = 1
@@ -102,7 +103,7 @@ namespace Sailing_Rocks.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2021, 4, 19, 11, 56, 21, 854, DateTimeKind.Local).AddTicks(668),
+                            CreatedOn = new DateTime(2021, 4, 21, 11, 13, 12, 63, DateTimeKind.Local).AddTicks(5253),
                             Description = "Sturdy and easy to find",
                             Image = "https://thumbs.dreamstime.com/b/dwayne-johnson-80711565.jpg",
                             Name = "Dwyane",
@@ -156,7 +157,7 @@ namespace Sailing_Rocks.Migrations
                         {
                             Id = 1,
                             Bio = "Software Developer",
-                            CreatedOn = new DateTime(2021, 4, 19, 11, 56, 21, 846, DateTimeKind.Local).AddTicks(9075),
+                            CreatedOn = new DateTime(2021, 4, 21, 11, 13, 12, 54, DateTimeKind.Local).AddTicks(445),
                             Email = "jkepic19@gmail.com",
                             FirstName = "Jason",
                             Hometown = "Parma, OH",

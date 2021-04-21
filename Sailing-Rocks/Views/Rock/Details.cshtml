@@ -38,18 +38,18 @@
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Rock.CreatedOn)
             </dd>
-            <dt class="col-sm-2">
+            @*<dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Rock.Serial)
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Rock.Serial)
-            </dd>
-            <dt class="col-sm-2">
+            </dd>*@
+            @*<dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Rock.User)
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Rock.User.Id)
-            </dd>
+            </dd>*@
         </dl>
     </div>
     <div>
@@ -62,8 +62,7 @@
         {
             <div class="Content">
                 <img src="@rockFriend.User.Image" alt="user profile picture">
-                <p>@rockFriend.User.FirstName</p>
-                <p>@rockFriend.User.LastName</p>
+                <p>@rockFriend.User.FirstName @rockFriend.User.LastName</p>
                 <p>@rockFriend.User.UserName</p>
 
             </div>
@@ -152,7 +151,7 @@
             <span asp-validation-for="Location.LocatedOn" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input type="submit" value="Add Location" class="btn btn-primary" />
+            <input onclick="checkForFile()"type="submit" value="Add Location" class="btn btn-primary" />
         </div>
     </form>
 </div>
@@ -269,6 +268,16 @@
         }
 
         document.querySelector('#find-me').addEventListener('click', geoFindMe);
+
+        function checkForFile() {
+            var file = document.getElementById("ImageFile").value;
+            if (file == "") {
+                event.preventDefault();
+                alert("You need to upload a file.");
+            }
+        }
+
+
 
     </script>
 }
