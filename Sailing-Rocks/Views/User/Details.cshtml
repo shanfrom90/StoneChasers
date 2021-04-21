@@ -56,7 +56,7 @@
             @foreach (var rock in Model.UserRocks)
             {
                 <li>
-                    <div class="Content">
+                    <div class="userRocksContent">
                         <a href="/Rock/Details/@rock.Id">@rock.Rock.Name</a>
                     </div>
                 </li>
@@ -67,7 +67,7 @@
     <div class="addRockContainter">
         <div class="foundRock">
             <a asp-action="Create" asp-controller="Rock">Add a new rock!</a>
-            <form asp-action="FoundRock">
+            <form class="foundRockForm"asp-action="FoundRock">
                 <label for="rockSerial">Add a found rock!</label><br>
                 <input type="text" id="serial" name="serial" placeholder="Rock Serial Number"><br>
                 <button type="submit" id="submitBtn">Submit</button>

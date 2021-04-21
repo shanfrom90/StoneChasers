@@ -54,8 +54,9 @@
         </div>
     </div>
    
-        <div id="mapContainer">
-    <div class="mapBox" id="map"></div></div>
+    <div id="mapContainer">
+        @*<div class="mapBox" id="map"></div>*@
+    </div>
   
  </div>
 
@@ -72,6 +73,7 @@
         //var inputValue;
 
         function initMap() {
+            
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: parseFloat(41.47463327829468), lng: parseFloat(-81.78872226820937) },
                 zoom: 10
@@ -130,19 +132,36 @@
             });
 
             map.fitBounds(bounds);
-
+            
         }
 
 
         submitFormButton.addEventListener('click', function () {
+            
 
-        const inputValue = userInputSerial.value;
-        url += inputValue;
+            if (document.getElementById('map') == null) {
+                const inputValue = userInputSerial.value;
+                url += inputValue;
+                let mapBox = document.createElement("div");
+                mapBox.className = "mapBox";
+                mapBox.id = "map";
+                console.log(mapBox);
+                let mapContainer = document.getElementById("mapContainer");
+                mapContainer.appendChild(mapBox);
 
-        mapLocations();
+                mapLocations();
 
-        console.log(url);
-
+                console.log(url);
+            }
+            else {
+                url = url.slice(0, -8);
+                const inputValue = userInputSerial.value;
+                url += inputValue;
+                
+                mapLocations();
+                
+                console.log(url);
+            }
         //document.addEventListener('DOMContentLoaded', function (){
     });
        
