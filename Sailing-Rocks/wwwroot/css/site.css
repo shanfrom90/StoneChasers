@@ -221,16 +221,17 @@ main {
 }
 
 .Content {
-    border-radius: 6px !important;
-    margin: 1em;
-    background-color: #fbf9e9;
-    background-image: url(/images/asfalt-dark.png);
-    width: 352px;
+/*    border-radius: 6px !important;
+*/    margin: 1em;
+    background-color: white;
+/*    background-image: url(/images/asfalt-dark.png);
+*/    width: 352px;
     border: 1px;
     -moz-box-shadow: 0 0 10px #000000;
     -webkit-box-shadow: 0 0 10px #000000;
     box-shadow: 0 0 10px #000000;
     padding: 1em;
+    padding-bottom: 1em;
 }
 .Content p {
     padding-left: 1em;
@@ -244,8 +245,8 @@ img {
     height: 320px;
     object-fit: cover;
     object-position: top;
-    border-radius: 6px;
-}
+/*    border-radius: 6px;
+*/}
 
 .Content:hover {
     -moz-box-shadow: 0 0 20px #000000;
@@ -318,9 +319,18 @@ img {
     align-items: center;
 }
 
-.row{
+.row {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
+}
+h4 {
+    margin-top: 1em;
+}
+
+.editRock, .addLocation {
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }

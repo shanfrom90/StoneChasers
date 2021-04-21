@@ -15,7 +15,7 @@
 <div class="text-center">
     <h1 class="display-4">Welcome Stone Chasers!</h1>
 
-    
+
     <div class="homeContent">
         @if (String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserId")))
         {
@@ -53,22 +53,23 @@
             <button type="submit" id="submitBtn">Submit</button>
         </div>
     </div>
-
-    <div class="featuredImages">
-        @foreach(var rock in (IEnumerable<Rock>)ViewBag.LatestRocks)
+    <hr />
+    <h2>Featured Rocks</h2>
+    <div class="Images">
+        @foreach (var rock in (IEnumerable<Rock>)ViewBag.LatestRocks)
         {
-           <img src=" @rock.Image " />
-          
+            <div class="Content">
+                <a href="/Rock/Details/@rock.Id"><img src=" @rock.Image " /></a>
+                <h4>@rock.Name</h4>
+            </div>
         }
-
-
     </div>
-   
+
     <div id="mapContainer">
         @*<div class="mapBox" id="map"></div>*@
     </div>
-  
- </div>
+
+</div>
 
 @section scripts {
     <script>
