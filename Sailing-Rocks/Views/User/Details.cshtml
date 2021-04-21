@@ -45,23 +45,26 @@
     <section class="Images">
         @foreach (var rock in Model.Rocks)
         {
-            <div class="Content">
-                <a href="/Rock/Details/@rock.Id"><img src="@rock.Image" alt="Rock Photo"></a>
-            </div>
+        <div class="Content">
+            <p>@rock.Serial</p>
+            <a href="/Rock/Details/@rock.Id"><img src="@rock.Image" alt="Rock Photo"></a>
+        </div>
         }
     </section>
     <h4>Rocks You Have Found</h4>
     <section class="Images">
-        <ul>
-            @foreach (var rock in Model.UserRocks)
-            {
-                <li>
-                    <div class="userRocksContent">
-                        <a href="/Rock/Details/@rock.Id">@rock.Rock.Name</a>
-                    </div>
-                </li>
-            }
-        </ul>
+        @foreach (var rock in Model.UserRocks)
+        {
+            <div class="Content">
+                <p>@rock.Rock.Serial</p>
+
+                @foreach (var location in rock.Rock.Locations)
+                {
+
+                    <a href="/Rock/Details/@rock.Id"><img src="@location.LocationImage" alt="Rock Photo"></a>
+                }
+            </div>
+        }
     </section>
     <hr />
     <div class="addRockContainter">

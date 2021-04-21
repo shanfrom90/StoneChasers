@@ -211,6 +211,7 @@ main {
 }*/
 
 .Images {
+    border-radius: 6px;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -220,16 +221,16 @@ main {
 }
 
 .Content {
+    border-radius: 6px !important;
     margin: 1em;
-    /*padding: 1em;
-*/ /* background-color: #5a6069;
-    background-image: url(/images/gravel.png);*/
-    width: 320px;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+    width: 352px;
     border: 1px;
-    border-radius: .25px;
     -moz-box-shadow: 0 0 10px #000000;
     -webkit-box-shadow: 0 0 10px #000000;
     box-shadow: 0 0 10px #000000;
+    padding: 1em;
 }
 .Content p {
     padding-left: 1em;
@@ -240,14 +241,27 @@ main {
 }
 img {
     width: 320px;
-    height: auto;
+    height: 320px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 6px;
 }
 
-.profileContainer{
+.Content:hover {
+    -moz-box-shadow: 0 0 20px #000000;
+    -webkit-box-shadow: 0 0 20px #000000;
+    box-shadow: 0 0 20px #000000;
+}
+
+.profileContainer {
+    border-radius: 6px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     margin: 1em;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+    padding: 1em;
 }
 
 .profileTable dl dd {
@@ -256,6 +270,7 @@ img {
 }
 
 .profileTable dl dt {
+    width: 10em;
     padding-left: 2em;
     padding-top: 1em;
 }
@@ -283,10 +298,14 @@ img {
 }
 
 .rockDetails {
+    border-radius: 6px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     margin: 1em;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+    padding: 1em;
 }
 
 .rockDetails {
@@ -296,5 +315,12 @@ img {
 .foundRockForm {
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
 }

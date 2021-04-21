@@ -25,6 +25,7 @@ namespace Sailing_Rocks.Models
         public string Serial { get; set; }
         public string Description { get; set; }
         public int UserId { get; set; }
+        [DisplayName("Created By")]
         public virtual User User { get; set; }
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual ICollection<Location> Locations { get; set; }
