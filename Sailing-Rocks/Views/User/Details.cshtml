@@ -45,10 +45,12 @@
     <section class="Images">
         @foreach (var rock in Model.Rocks)
         {
+
         <div class="Content">
             <p>@rock.Serial</p>
             <a href="/Rock/Details/@rock.Id"><img src="@rock.Image" alt="Rock Photo"></a>
         </div>
+
         }
     </section>
     <h4>Rocks You Have Found</h4>
@@ -84,7 +86,7 @@
 </div>
 <div class="profileLinks">
     <a asp-action="Update" asp-route-id="@Model.Id">Edit Profile</a> |
-    <a asp-action="Delete" asp-route-id="@Model.Id">Delete Account</a> |
+    @*<a asp-action="Delete" asp-route-id="@Model.Id">Delete Account</a> |*@
     <a asp-action="Index" asp-controller="Home">Back to Home</a>
 </div>
 

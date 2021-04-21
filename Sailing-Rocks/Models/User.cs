@@ -12,10 +12,31 @@ namespace Sailing_Rocks.Models
 {
     public class User
     {
+        private string _firstName;
         private string _password;
         public int Id { get; set; }
         [Display(Name = "First Name")]
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get
+            {
+                return _firstName;
+            }
+            set
+            {
+
+                if (String.IsNullOrEmpty(value))
+                {
+                    _firstName = "Stone";
+                }
+                else
+                {
+                   
+                    _firstName = value;
+                }
+            }
+        }
+
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [Required]

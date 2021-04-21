@@ -53,6 +53,16 @@
             <button type="submit" id="submitBtn">Submit</button>
         </div>
     </div>
+
+    <div class="featuredImages">
+        @foreach(var rock in (IEnumerable<Rock>)ViewBag.LatestRocks)
+        {
+           <img src=" @rock.Image " />
+          
+        }
+
+
+    </div>
    
     <div id="mapContainer">
         @*<div class="mapBox" id="map"></div>*@

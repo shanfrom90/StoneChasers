@@ -4,12 +4,12 @@
 @{
     ViewData["Title"] = "Details";
 
-<style>
-    #map{
-        height: 600px;
-        width: 100%;
-    }
-</style>
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
 }
 
 <h1>Rock Details</h1>
@@ -19,6 +19,7 @@
     <hr />
     <div class="rockDetails">
         <img src="@Model.Rock.Image" style="width: auto; height: 315px;" alt="Content Photo">
+
         <div class="profileTable">
             <dl class="row">
                 @*<dt class="col-sm-2">
@@ -113,59 +114,68 @@
             </div>
         }
 
-    </div>
-    <h3>Add a New Location</h3>
-    <div class="col-md-4">
-        <form asp-action="Create" asp-controller="Location" enctype="multipart/form-data">
-            <input asp-for="Location.RockId" type="hidden" />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Location.LocationName" class="control-label"></label>
-                <input asp-for="Location.LocationName" class="form-control" />
-                <span asp-validation-for="Location.LocationName" class="text-danger"></span>
-            </div>
+
+</div>
+<h3>Add a New Location</h3>
+<button id="find-me">Show my location</button>
+<br />
+<p id="status"></p>
+<a id="map-link"></a>
+
+<div class="col-md-4">
+    <form asp-action="Create" asp-controller="Location" enctype="multipart/form-data">
+        <input asp-for="Location.RockId" type="hidden" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Location.LocationName" class="control-label"></label>
+            <input asp-for="Location.LocationName" class="form-control" />
+            <span asp-validation-for="Location.LocationName" class="text-danger"></span>
+        </div>
 
 
-            <div class="form-group">
-                <label asp-for="Location.Lat" class="control-label"></label>
-                <input type="number" min="-90" max="90" step="0.000000000000001"
- asp-for="Location.Lat" class="form-control" />
-                <span asp-validation-for="Location.Lat" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Location.Lng" class="control-label"></label>
-                <input type="number" min="-180" max="180" step="0.000000000000001"
- asp-for="Location.Lng" class="form-control" />
-                <span asp-validation-for="Location.Lng" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageFile" class="control-label"></label>
-                <input accept="image/*" asp-for="ImageFile"/>
-                <span asp-validation-for="ImageFile" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Location.Comment" class="control-label"></label>
-                <input asp-for="Location.Comment" class="form-control" />
-                <span asp-validation-for="Location.Comment" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Location.LocatedOn" class="control-label"></label>
-                <input asp-for="Location.LocatedOn" class="form-control" />
-                <span asp-validation-for="Location.LocatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Add Location" class="btn btn-primary" />
-            </div>
-        </form>
+
+        <div class="form-group">
+            <label asp-for="Location.Lat" class="control-label"></label>
+            <input type="number" min="-90" max="90" step="0.000000000000001"
+                   asp-for="Location.Lat" class="form-control" />
+            <span asp-validation-for="Location.Lat" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Location.Lng" class="control-label"></label>
+            <input type="number" min="-180" max="180" step="0.000000000000001"
+                   asp-for="Location.Lng" class="form-control" />
+            <span asp-validation-for="Location.Lng" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImageFile" class="control-label"></label>
+            <input accept="image/*" asp-for="ImageFile" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+            <div class="text-danger">@ViewBag.Error</div>
+
+        </div>
+        <div class="form-group">
+            <label asp-for="Location.Comment" class="control-label"></label>
+            <input asp-for="Location.Comment" class="form-control" />
+            <span asp-validation-for="Location.Comment" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Location.LocatedOn" class="control-label"></label>
+            <input asp-for="Location.LocatedOn" class="form-control" />
+            <span asp-validation-for="Location.LocatedOn" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input onclick="checkForFile()"type="submit" value="Add Location" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
 
-    <div id="mapContainer"><div class="mapBox" id="map"></div></div>
+<div id="mapContainer"><div class="mapBox" id="map"></div></div>
 
 
-    
 
-    @section scripts {
-        <script>
+
+@section scripts {
+    <script>
     const map_url = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDxEiiPssDguXJXixsSljlWov1JZjpt3fk&callback=initMap&signed_in=true&language=';
 
     var url = 'https://localhost:44366/Rock/getrocklocation/' + @Model.Rock.Id;
@@ -241,6 +251,46 @@
 
     }
 
+        function geoFindMe() {
 
-        </script>
-    }
+            const status = document.querySelector('#status');
+            const mapLink = document.querySelector('#map-link');
+
+           /* mapLink.href = '';*/
+            mapLink.textContent = '';
+
+            function success(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                status.textContent = '';
+                mapLink.textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
+            }
+
+            function error() {
+                status.textContent = 'Unable to retrieve your location';
+            }
+
+            if (!navigator.geolocation) {
+                status.textContent = 'Geolocation is not supported by your browser';
+            } else {
+                status.textContent = 'Locating';
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
+
+        }
+
+        document.querySelector('#find-me').addEventListener('click', geoFindMe);
+
+        function checkForFile() {
+            var file = document.getElementById("ImageFile").value;
+            if (file == "") {
+                event.preventDefault();
+                alert("You need to upload a file.");
+            }
+        }
+
+
+
+    </script>
+}

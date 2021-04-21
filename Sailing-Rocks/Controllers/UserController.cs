@@ -91,20 +91,38 @@ namespace Sailing_Rocks.Controllers
         }
 
 
-        public ViewResult Delete(int id)
-        {
-            var user = userRepo.GetById(id);
+        //public ViewResult Delete(int id)
+        //{
+        //    var user = userRepo.GetById(id);
 
-            return View(user);
-        }
+        //    return View(user);
+        //}
 
-        [HttpPost]
-        public ActionResult Delete(User model)
-        {
-            userRepo.Delete(model);
-            
-            return Logout();
-        }
+        //[HttpPost]
+        //public ActionResult Delete(User model)
+        //{
+        //    SailingRocksContext db = new SailingRocksContext();
+        //    var user = db.Users.Find(model.Id);
+
+        //    foreach (var userRock in user.UserRocks)
+        //    {
+        //        userRock.User = null;
+        //    }
+
+        //    var rocks = db.Rocks.Where(r => r.UserId == model.Id).ToList();
+
+        //    foreach (var rock in rocks)
+        //    {
+        //        rock.UserRocks.Clear();
+        //    }
+        //    db.SaveChanges();
+        //    db.Rocks.RemoveRange(rocks);
+        //    db.Users.Remove(user);
+        //    db.SaveChanges();
+
+
+        //    return Logout();
+        //}
 
         public ViewResult Login()
         {
