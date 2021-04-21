@@ -434,3 +434,4 @@ C:\Users\wecan\source\repos\FinalProject-SailingRocks\Sailing-Rocks\obj\Debug\ne
 C:\Users\wecan\source\repos\FinalProject-SailingRocks\Sailing-Rocks\obj\Debug\netcoreapp3.1\Sailing-Rocks.dll
 C:\Users\wecan\source\repos\FinalProject-SailingRocks\Sailing-Rocks\obj\Debug\netcoreapp3.1\Sailing-Rocks.pdb
 C:\Users\wecan\source\repos\FinalProject-SailingRocks\Sailing-Rocks\obj\Debug\netcoreapp3.1\Sailing-Rocks.genruntimeconfig.cache
+C:\Users\wecan\source\repos\FinalProject-SailingRocks\Sailing-Rocks\obj\Debug\netcoreapp3.1\Razor\Views\Home\About.cshtml.g.cs
