@@ -222,7 +222,7 @@ main {
 .Content {
     margin: 1em;
     /*padding: 1em;
-*/   /* background-color: #5a6069;
+*/ /* background-color: #5a6069;
     background-image: url(/images/gravel.png);*/
     width: 320px;
     border: 1px;
@@ -241,7 +241,6 @@ main {
 img {
     width: 320px;
     height: auto;
-    
 }
 
 .profileContainer{

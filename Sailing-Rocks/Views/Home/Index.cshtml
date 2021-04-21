@@ -137,10 +137,11 @@
 
 
         submitFormButton.addEventListener('click', function () {
-            const inputValue = userInputSerial.value;
-            url += inputValue;
+            
 
             if (document.getElementById('map') == null) {
+                const inputValue = userInputSerial.value;
+                url += inputValue;
                 let mapBox = document.createElement("div");
                 mapBox.className = "mapBox";
                 mapBox.id = "map";
@@ -154,6 +155,9 @@
             }
             else {
                 url = url.slice(0, -8);
+                const inputValue = userInputSerial.value;
+                url += inputValue;
+                
                 mapLocations();
                 
                 console.log(url);
