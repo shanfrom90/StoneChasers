@@ -20,6 +20,9 @@ namespace Sailing_Rocks.Controllers
 
         public IActionResult Index()
         {
+            SailingRocksContext db = new SailingRocksContext();
+            ViewBag.LatestRocks = db.Rocks.OrderByDescending(r => r.Id).Take(6);
+
             return View();
         }
 
