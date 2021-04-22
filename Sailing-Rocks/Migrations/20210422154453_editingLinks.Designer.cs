@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sailing_Rocks;
 
 namespace Sailing_Rocks.Migrations
 {
     [DbContext(typeof(SailingRocksContext))]
-    partial class SailingRocksContextModelSnapshot : ModelSnapshot
+    [Migration("20210422154453_editingLinks")]
+    partial class editingLinks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +63,7 @@ namespace Sailing_Rocks.Migrations
                             Comment = "10/10 Would pick up again.",
                             Lat = "41.363528",
                             Lng = "-81.851403",
-                            LocatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 23, DateTimeKind.Local).AddTicks(7120),
+                            LocatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 263, DateTimeKind.Local).AddTicks(6281),
                             LocationImage = "https://lh3.googleusercontent.com/pw/ACtC-3cNYh8lnJbZ-hcw9MxMrem_I3IZvFSCjylLUGKFgLk0rkPRWb9kI0rZGTNCppqzqO07AxRTlQYMlo7DDuCc2ddOioH-nY3Duj88aVYqnfz4XJs3I6kY6_uBFAEhlsIAKMPRg5LaA2mJBJUPIZBm_xk=w470-h626-no?authuser=0",
                             LocationName = "Coe Lake",
                             RockId = 1
@@ -72,7 +74,7 @@ namespace Sailing_Rocks.Migrations
                             Comment = "Love on the earth!",
                             Lat = "41.435258",
                             Lng = "81.845719",
-                            LocatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 23, DateTimeKind.Local).AddTicks(9860),
+                            LocatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 268, DateTimeKind.Local).AddTicks(4001),
                             LocationImage = "https://lh3.googleusercontent.com/pw/ACtC-3fuuUDOXHlU4ZrfXr9wGBCA0e2goOoEd9dTcfaiAxCEAQO68FH_-JpNXUMHNHxsX-IFyL4gfpbbveiY0wRi8HdaGc7nZ-HCNIEUexgyA6owdsvudev5E8mJSCY4JuvwSdfgDQH0UThEMhQOq-OF09c=w470-h626-no?authuser=0",
                             LocationName = "Rocky River Reservation",
                             RockId = 2
@@ -83,7 +85,7 @@ namespace Sailing_Rocks.Migrations
                             Comment = "This made my day!",
                             Lat = "41.486700",
                             Lng = "-81.902125",
-                            LocatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 23, DateTimeKind.Local).AddTicks(9920),
+                            LocatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 268, DateTimeKind.Local).AddTicks(4153),
                             LocationImage = "https://lh3.googleusercontent.com/pw/ACtC-3cVXz2OU6RmroM460EY_88XA7tnBzeS82uuPOnOEZalDAuX_odTJGbS60FYyIut8-lzRNL58IB6CQsm4-_CNUlUhzWdjMxssOLZciDG31f0-LUOCWMT3Bk6W8d8hWDyZkYoAZ5I267Cf4gQEHUjaWVa=w470-h626-no?authuser=0",
                             LocationName = "Lake Erie",
                             RockId = 3
@@ -94,7 +96,7 @@ namespace Sailing_Rocks.Migrations
                             Comment = "I love this rock so much!",
                             Lat = "41.29424235787053",
                             Lng = "-82.15200988091138",
-                            LocatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 23, DateTimeKind.Local).AddTicks(9926),
+                            LocatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 268, DateTimeKind.Local).AddTicks(4162),
                             LocationImage = "https://lh3.googleusercontent.com/pw/ACtC-3cSZgugu_nTsn7kUufw-G_IVKSFqePIMPbDHiA7n5XlatblZTQhLaZH0y0CVtTXtcMP69i564m_UZFcTyOH16HeUPTOR_u_cWBH3Ta-MI4c5NFmaDzRmH2w1rXNizvehZgSNgkG6-ZfkVCsNuDV3ws=w470-h626-no?authuser=0",
                             LocationName = "Carlisle Reservation",
                             RockId = 4
@@ -105,7 +107,7 @@ namespace Sailing_Rocks.Migrations
                             Comment = "Love for everyone!",
                             Lat = "41.3639780269892",
                             Lng = "-81.85258535965691",
-                            LocatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 23, DateTimeKind.Local).AddTicks(9931),
+                            LocatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 268, DateTimeKind.Local).AddTicks(4169),
                             LocationImage = "https://lh3.googleusercontent.com/pw/ACtC-3dT4hvboHaq__uup5U6KvGq-vLMJXuilNM__lLUxFKh_X3uxGGj_i0oggaxRy5ahPekWJ1xYsZUf0t1laVPtjaVt1DpINz1Hy_ZN5UJBfm_jHJrWXRUHaoJFonmy9LdnLRAW8RCmTyCaSSaEFstfDg=w470-h626-no?authuser=0",
                             LocationName = "Coe Lake",
                             RockId = 4
@@ -147,9 +149,9 @@ namespace Sailing_Rocks.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 22, DateTimeKind.Local).AddTicks(9449),
+                            CreatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 262, DateTimeKind.Local).AddTicks(346),
                             Description = "Some folks don't believe in this rock, but I do.",
-                            Image = "https://lh3.googleusercontent.com/pw/ACtC-3cf5OCoKweRgXmgpS1KMLb4OCgF-rUtKZ6gLvw8YQnih2e77W0lg6nLfuRimF9Slg7cRBfmqj3VR1qiSDaiEgZJqX2Xt6u5XPMfcwAjPfgYlIbo62_Xk-vBb-Y6JXkNgVtNTdp7xsgFiOooaxV-im0=w835-h626-no?authuser=0",
+                            Image = "https://lh3.googleusercontent.com/pw/ACtC-3cNYh8lnJbZ-hcw9MxMrem_I3IZvFSCjylLUGKFgLk0rkPRWb9kI0rZGTNCppqzqO07AxRTlQYMlo7DDuCc2ddOioH-nY3Duj88aVYqnfz4XJs3I6kY6_uBFAEhlsIAKMPRg5LaA2mJBJUPIZBm_xk=w470-h626-no?authuser=0",
                             Name = "Rock Ness",
                             Serial = "BCDF2346",
                             UserId = 1
@@ -157,7 +159,7 @@ namespace Sailing_Rocks.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 23, DateTimeKind.Local).AddTicks(2757),
+                            CreatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 262, DateTimeKind.Local).AddTicks(3869),
                             Description = "Love always wins!",
                             Image = "https://lh3.googleusercontent.com/pw/ACtC-3ek5FZPxYzihecIhMnfaY9hviSskhDJu7bMVUSBmoD2M7wy6EWutdNzmiOBzsxYrhHEDQ_R3-ydbQOGB5WRYZU_9wNnzVIqYmqjf1KvVHKVDlZY5wWFJw7qgETjkkqEdp4a4uOdzVyLz89-abhejTc=w470-h626-no?authuser=0",
                             Name = "Love",
@@ -167,7 +169,7 @@ namespace Sailing_Rocks.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 23, DateTimeKind.Local).AddTicks(2824),
+                            CreatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 262, DateTimeKind.Local).AddTicks(3952),
                             Description = "Make a Wish",
                             Image = "https://lh3.googleusercontent.com/pw/ACtC-3ft7a2r_EJqEd2LvYmbRRYQmq4uFXDdGKZ9akut1XTqk7u_RWRaFD0c4CU-c1qQEI-3_eGD3ftiwIQHJqllRX8vBIZSdj8I-vr7RVOVNAHVsNeTqG7Qn1g6diCJ8MGO0cKpUvAyqkMtnwRXu_aVAG8=w470-h626-no?authuser=0",
                             Name = "Dandelion",
@@ -177,7 +179,7 @@ namespace Sailing_Rocks.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 23, DateTimeKind.Local).AddTicks(2832),
+                            CreatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 262, DateTimeKind.Local).AddTicks(3964),
                             Description = "Make a Wish",
                             Image = "https://lh3.googleusercontent.com/pw/ACtC-3fCsuURb-SEfSvRvxctcRMhJvuFkZj2ENeNCcNKldagp9WcOz-v9lmfzz3D7SDsR7hMNS7-cnOES8OSSZINyaIkSeBZ5NfIxWcPh0-83YnaqGCWJLNg8qRvPTIKBqRUN3k35ena3xYfd1KLcCHqtEg=w470-h626-no?authuser=0",
                             Name = "Heart You",
@@ -231,7 +233,7 @@ namespace Sailing_Rocks.Migrations
                         {
                             Id = 1,
                             Bio = "Software Developer",
-                            CreatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 16, DateTimeKind.Local).AddTicks(1394),
+                            CreatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 249, DateTimeKind.Local).AddTicks(1644),
                             Email = "jak719@gmail.com",
                             FirstName = "Jason",
                             Hometown = "Parma, OH",
@@ -244,7 +246,7 @@ namespace Sailing_Rocks.Migrations
                         {
                             Id = 2,
                             Bio = "Software Developer",
-                            CreatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 20, DateTimeKind.Local).AddTicks(7278),
+                            CreatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 255, DateTimeKind.Local).AddTicks(6827),
                             Email = "efaler@gmail.com",
                             FirstName = "Eric",
                             Hometown = "Fairview Park, OH",
@@ -257,7 +259,7 @@ namespace Sailing_Rocks.Migrations
                         {
                             Id = 3,
                             Bio = "Avid Hiker",
-                            CreatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 20, DateTimeKind.Local).AddTicks(7346),
+                            CreatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 255, DateTimeKind.Local).AddTicks(6906),
                             Email = "shanfrom90@gmail.com",
                             FirstName = "Shannon",
                             Hometown = "Cincinnati, OH",
@@ -270,7 +272,7 @@ namespace Sailing_Rocks.Migrations
                         {
                             Id = 4,
                             Bio = "Fitness Fiend",
-                            CreatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 20, DateTimeKind.Local).AddTicks(7353),
+                            CreatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 255, DateTimeKind.Local).AddTicks(6963),
                             Email = "tiahC@gmail.com",
                             FirstName = "Tiah",
                             Hometown = "Cleveland, OH",
@@ -283,7 +285,7 @@ namespace Sailing_Rocks.Migrations
                         {
                             Id = 5,
                             Bio = "Artist",
-                            CreatedOn = new DateTime(2021, 4, 22, 12, 0, 21, 20, DateTimeKind.Local).AddTicks(7363),
+                            CreatedOn = new DateTime(2021, 4, 22, 11, 44, 52, 255, DateTimeKind.Local).AddTicks(6971),
                             Email = "JE@gmail.com",
                             FirstName = "JE",
                             Hometown = "Cincinnati, OH",
@@ -320,30 +322,6 @@ namespace Sailing_Rocks.Migrations
                         {
                             Id = 1,
                             RockId = 1,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 2,
-                            RockId = 2,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            RockId = 3,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 4,
-                            RockId = 4,
-                            UserId = 5
-                        },
-                        new
-                        {
-                            Id = 5,
-                            RockId = 4,
                             UserId = 1
                         });
                 });

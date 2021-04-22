@@ -32,7 +32,7 @@ namespace Sailing_Rocks.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult About() { 
 
             return View();
         }
