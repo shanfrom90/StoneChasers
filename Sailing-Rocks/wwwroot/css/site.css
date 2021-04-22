@@ -1,4 +1,4 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 /* Color Pallet 
@@ -148,6 +148,7 @@ body {
     border-radius: 6px;
     box-shadow: 0 5px 15px rgba(0,0,0, .5);
     transition: 0.5s;
+
 }
 
 .mainContainer{
@@ -204,6 +205,7 @@ main {
 
 
 
+
 /*#mapContainer {
     padding: 1em;
     background-color: #d9beb0;
@@ -221,17 +223,20 @@ main {
 }
 
 .Content {
+
 /*    border-radius: 6px !important;
 */    margin: 1em;
     background-color: white;
 /*    background-image: url(/images/asfalt-dark.png);
 */    width: 352px;
+
     border: 1px;
     -moz-box-shadow: 0 0 10px #000000;
     -webkit-box-shadow: 0 0 10px #000000;
     box-shadow: 0 0 10px #000000;
     padding: 1em;
     padding-bottom: 1em;
+
 }
 .Content p {
     padding-left: 1em;
@@ -245,8 +250,10 @@ img {
     height: 320px;
     object-fit: cover;
     object-position: top;
+
 /*    border-radius: 6px;
 */}
+
 
 .Content:hover {
     -moz-box-shadow: 0 0 20px #000000;
@@ -319,11 +326,14 @@ img {
     align-items: center;
 }
 
+
 .row {
+
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+
 }
 h4 {
     margin-top: 1em;
@@ -333,4 +343,5 @@ h4 {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }

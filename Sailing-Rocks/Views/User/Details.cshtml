@@ -1,4 +1,4 @@
-﻿@model Sailing_Rocks.Models.User
+@model Sailing_Rocks.Models.User
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
@@ -42,10 +42,13 @@
         </div>
     </div>
 
+
     <h4>Rocks Made</h4>
+
     <section class="Images">
         @foreach (var rock in Model.Rocks)
         {
+
 
             <div class="Content">
                 <a href="/Rock/Details/@rock.Id"><img src="@rock.Image" alt="Rock Photo"></a>
@@ -55,6 +58,7 @@
         }
     </section>
     <h4>Rocks Found</h4>
+
     <section class="Images">
         @foreach (var rock in Model.UserRocks)
         {
@@ -64,6 +68,7 @@
                     <a href="/Rock/Details/@rock.RockId"><img src="@location.LocationImage" alt="Rock Photo"></a>
                 }
                 <h4>@rock.Rock.Name</h4>
+
             </div>
         }
     </section>
@@ -93,6 +98,7 @@
     }
     @*<a asp-action="Delete" asp-route-id="@Model.Id">Delete Account</a> |*@
     | <a asp-action="Index" asp-controller="Home">Back to Home</a>
+
 </div>
 
 

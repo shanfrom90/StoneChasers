@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sailing_Rocks.Models;
@@ -53,6 +53,7 @@ namespace Sailing_Rocks.Controllers
             return RedirectToAction("Login", "User");
         }
 
+
         public ViewResult Details(string? message, int? id)
         {
             ViewBag.message = message;
@@ -67,6 +68,7 @@ namespace Sailing_Rocks.Controllers
                 user = userRepo.GetById((int)id);
             }
                 return View(user);
+
         }
 
         public ViewResult Update(int id)

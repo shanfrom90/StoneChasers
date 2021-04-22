@@ -23,6 +23,7 @@ namespace Sailing_Rocks.Controllers
             SailingRocksContext db = new SailingRocksContext();
             ViewBag.LatestRocks = db.Rocks.OrderByDescending(r => r.Id).Take(6);
 
+
             return View();
         }
 
@@ -30,6 +31,13 @@ namespace Sailing_Rocks.Controllers
         {
             return View();
         }
+
+        public IActionResult About()
+
+            return View();
+        }
+
+
         public IActionResult Privacy()
         {
             return View();
