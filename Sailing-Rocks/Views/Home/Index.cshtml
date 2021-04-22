@@ -13,8 +13,15 @@
 @section styles{ }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome Stone Chasers!</h1>
-
+    <img class="Logo" src="/images/Logo.png"/>
+    <div class="welcomeP">
+        <h5 class="display-4">Welcome Stone Chasers!</h5>
+        <p>Found a rock? Enter the code on the back of it to learn more about your rock and the places it has been.</p>
+        <hr />
+        <p>Sign up to add where you found the rock and get started creating your own rocks to put out into the world. The goal is to spread kindness and positivity across the globe by sharing rocks you've created and found.</p>
+        <hr />
+        <p>For help getting started head over to the Community page for tips and inspiration and find a local group in your area!</p>
+    </div>
 
     <div class="homeContent">
         @if (String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserId")))
@@ -45,24 +52,24 @@
 
 
 
+        <h2>Featured Rocks</h2>
+        <div class="Images">
+            @foreach (var rock in (IEnumerable<Rock>)ViewBag.LatestRocks)
+            {
+                <div class="Content">
+                    <a href="/Rock/Details/@rock.Id"><img src=" @rock.Image " /></a>
+                    <h4>@rock.Name</h4>
+                </div>
+            }
+        </div>
+        <hr />
         <div class="foundRock">
-            <label for="rockSerial">Add a found rock!</label><br>
+            <label for="rockSerial">See where your found rock has been!</label><br>
 
             <input type="text" id="rockSerial" name="rockSerial" placeholder="Rock Serial Number" />
             <br />
             <button type="submit" id="submitBtn">Submit</button>
         </div>
-    </div>
-    <hr />
-    <h2>Featured Rocks</h2>
-    <div class="Images">
-        @foreach (var rock in (IEnumerable<Rock>)ViewBag.LatestRocks)
-        {
-            <div class="Content">
-                <a href="/Rock/Details/@rock.Id"><img src=" @rock.Image " /></a>
-                <h4>@rock.Name</h4>
-            </div>
-        }
     </div>
 
     <div id="mapContainer">
