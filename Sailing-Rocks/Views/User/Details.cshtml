@@ -41,7 +41,12 @@
             </dl>
         </div>
     </div>
-
+    @if (Convert.ToInt32(HttpContextAccessor.HttpContext.Session.GetString("UserId")) == Model.Id)
+    {
+        <div class="editUser">
+            <button><a asp-action="Update" asp-controller="User" asp-route-id="@Model.Id">Edit Profile</a></button>
+        </div>
+    }
 
     <h4>Rocks Made</h4>
 
@@ -62,14 +67,15 @@
     <section class="Images">
         @foreach (var rock in Model.UserRocks)
         {
-            <div class="Content">
                 @foreach (var location in rock.Rock.Locations)
                 {
+            <div class="Content">
                     <a href="/Rock/Details/@rock.RockId"><img src="@location.LocationImage" alt="Rock Photo"></a>
-                }
                 <h4>@rock.Rock.Name</h4>
-
             </div>
+                    break;
+                }
+
         }
     </section>
     <hr />
@@ -91,14 +97,6 @@
         </div>
     }
 </div>
-<div class="profileLinks">
-    @if (Convert.ToInt32(HttpContextAccessor.HttpContext.Session.GetString("UserId")) == Model.Id)
-    { 
-        <a asp-action="Update" asp-route-id="@Model.Id">Edit Profile</a>
-    }
-    @*<a asp-action="Delete" asp-route-id="@Model.Id">Delete Account</a> |*@
-    | <a asp-action="Index" asp-controller="Home">Back to Home</a>
 
-</div>
 
 
