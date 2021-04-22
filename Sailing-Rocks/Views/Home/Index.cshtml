@@ -1,4 +1,4 @@
-﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 @model Sailing_Rocks.Models.User
 
 @{
@@ -15,7 +15,7 @@
 <div class="text-center">
     <h1 class="display-4">Welcome Stone Chasers!</h1>
 
-    
+
     <div class="homeContent">
         @if (String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserId")))
         {
@@ -53,22 +53,23 @@
             <button type="submit" id="submitBtn">Submit</button>
         </div>
     </div>
-
-    <div class="featuredImages">
-        @foreach(var rock in (IEnumerable<Rock>)ViewBag.LatestRocks)
+    <hr />
+    <h2>Featured Rocks</h2>
+    <div class="Images">
+        @foreach (var rock in (IEnumerable<Rock>)ViewBag.LatestRocks)
         {
-           <img src=" @rock.Image " />
-          
+            <div class="Content">
+                <a href="/Rock/Details/@rock.Id"><img src=" @rock.Image " /></a>
+                <h4>@rock.Name</h4>
+            </div>
         }
-
-
     </div>
-   
+
     <div id="mapContainer">
         @*<div class="mapBox" id="map"></div>*@
     </div>
-  
- </div>
+
+</div>
 
 @section scripts {
     <script>
@@ -125,13 +126,15 @@
                     url: '/images/Rock1.png', // url
                     scaledSize: new google.maps.Size(150, 150), // scaled size
                     origin: new google.maps.Point(0, 0), // origin
-                    anchor: new google.maps.Point(0, 0) // anchor
+                    anchor: new google.maps.Point(75, 75) // anchor
                 };
 
                 markers.push(
                     new google.maps.Marker({
                         position: position,
                         map: map,
+                        title: "You Found Me!",
+                        clickable: false,
                         icon: icon,
                         animation: google.maps.Animation.BOUNCE
 
@@ -140,6 +143,27 @@
 
                 bounds.extend(position);
             });
+
+            if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+                var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+                var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+                bounds.extend(extendPoint1);
+                bounds.extend(extendPoint2);
+            }
+
+            //google.maps.event.addListener(map, 'zoom_changed', function () {
+            //    zoomChangeBoundsListener =
+            //        google.maps.event.addListener(map, 'bounds_changed', function (event) {
+            //            if (this.getZoom() > 18 && this.initialZoom == true) {
+            //                // Change max/min zoom here
+            //                this.setZoom(18);
+            //                this.initialZoom = false;
+            //            }
+            //            google.maps.event.removeListener(zoomChangeBoundsListener);
+            //        });
+            //});
+            //map.initialZoom = true;
+
 
             map.fitBounds(bounds);
             
@@ -177,3 +201,4 @@
        
     </script>
 }
+

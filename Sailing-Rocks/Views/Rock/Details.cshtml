@@ -1,4 +1,3 @@
-
 @model Sailing_Rocks.Models.RockLocationVM
 
 @{
@@ -18,16 +17,16 @@
     <h4>@Model.Rock.Name</h4>
     <hr />
     <div class="rockDetails">
-        <img src="@Model.Rock.Image" style="width: auto; height: 315px;" alt="Content Photo">
+        <img src="@Model.Rock.Image" alt="Content Photo">
 
         <div class="profileTable">
             <dl class="row">
                 @*<dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Rock.Name)
-                </dt>*@
+                        @Html.DisplayNameFor(model => model.Rock.Name)
+                    </dt>*@
                 @*<dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Rock.Name)
-                </dd>*@
+                        @Html.DisplayFor(model => model.Rock.Name)
+                    </dd>*@
                 <dt class="col-sm-2">
                     @Html.DisplayNameFor(model => model.Rock.Description)
                 </dt>
@@ -57,118 +56,116 @@
                 </dd>
             </dl>
         </div>
-        @if (Convert.ToInt32(HttpContextAccessor.HttpContext.Session.GetString("UserId")) == Model.Rock.UserId)
+    </div>
+    @if (Convert.ToInt32(HttpContextAccessor.HttpContext.Session.GetString("UserId")) == Model.Rock.UserId)
+    {
+        <div class="editRock">
+            <button><a asp-action="Edit" asp-controller="Rock" asp-route-id="@Model.Rock.Id">Edit Rock</a></button>
+        </div>
+    }
+
+    <h2>Friends of @Model.Rock.Name</h2>
+    <div class="Images">
+        @foreach (var rockFriend in Model.Rock.UserRocks)
         {
-            <div>
-                <button><a asp-action="Edit" asp-controller="Rock" asp-route-id="@Model.Rock.Id">Edit Rock</a></button>
+            <div class="Content">
+                <a href="/User/Details/@rockFriend.User.Id"><img src="@rockFriend.User.Image" alt="user profile picture"></a>
+                <h4>@rockFriend.User.UserName</h4>
             </div>
         }
     </div>
 
-        <h2>Friends of @Model.Rock.Name</h2>
-        <div class="Images">
-            @foreach (var rockFriend in Model.Rock.UserRocks)
-            {
-                <div class="Content">
-                    <p>@rockFriend.User.UserName</p>
-                    <img src="@rockFriend.User.Image" alt="user profile picture">
-                   
-
-                </div>
-            }
-        </div>
-
-        @*will display all locations*@
-        @*@foreach (var location in Model.Rock.Locations)
+    @*will display all locations*@
+    @*@foreach (var location in Model.Rock.Locations)
         {
             <p>@location.Lat</p>
             <p>@location.Lng</p>
 
         }*@
-        <h2>Places I Have Been</h2>
-        <div class="Images">
-            @foreach (var location in @Model.Rock.Locations)
-            {
+    <h2>Places I Have Been</h2>
+    <div class="Images">
+        @foreach (var location in @Model.Rock.Locations)
+        {
             <div class="Content">
-                <h4>@location.LocationName</h4>
                 <img src="@location.LocationImage" alt="test">
+                <h4>@location.LocationName</h4>
                 <p>@location.Comment</p>
-                <p>@Model.Rock.Locations.LastOrDefault().Lat</p>
-                <p>@Model.Rock.Locations.LastOrDefault().Lng</p>
             </div>
-            }
+        }
+    </div>
+    @if (Model.Rock.Locations.Count == 0)
+    {
+        <p>No Locations</p>
+    }
+    else
+    {
+        <h2>Last Seen Here:</h2>
+        <div class="Content">
+            <img src="@Model.Rock.Locations.LastOrDefault().LocationImage" />
+            <h4>@Model.Rock.Locations.LastOrDefault().LocationName</h4>
+            <p>@Model.Rock.Locations.LastOrDefault().Comment</p>
         </div>
-        @if (Model.Rock.Locations.Count == 0)
-        {
-            <p>No Locations</p>
-        }
-        else
-        {
-            <h2>Last Seen Here:</h2>
-            <div class="Content">
-                <h4>@Model.Rock.Locations.LastOrDefault().LocationName</h4>
-                <img src="@Model.Rock.Locations.LastOrDefault().LocationImage" />
-                <p>@Model.Rock.Locations.LastOrDefault().Comment</p>
-                <p>@Model.Rock.Locations.LastOrDefault().Lat</p>
-                <p>@Model.Rock.Locations.LastOrDefault().Lng</p>
-            </div>
-        }
+    }
 
 
 </div>
-<h3>Add a New Location</h3>
-<button id="find-me">Show my location</button>
-<br />
-<p id="status"></p>
-<a id="map-link"></a>
+@if (!String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserId"))) { 
+    <h2>Add a New Location</h2>
+<div class="addLocation">
+    <button id="find-me">Show my location</button>
 
-<div class="col-md-4">
-    <form asp-action="Create" asp-controller="Location" enctype="multipart/form-data">
-        <input asp-for="Location.RockId" type="hidden" />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Location.LocationName" class="control-label"></label>
-            <input asp-for="Location.LocationName" class="form-control" />
-            <span asp-validation-for="Location.LocationName" class="text-danger"></span>
-        </div>
+    <br />
+    <p id="status"></p>
+    <a id="map-link"></a>
+
+    <div class="col-md-4">
+        <form asp-action="Create" asp-controller="Location" enctype="multipart/form-data">
+            <input asp-for="Location.RockId" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Location.LocationName" class="control-label"></label>
+                <input asp-for="Location.LocationName" class="form-control" />
+                <span asp-validation-for="Location.LocationName" class="text-danger"></span>
+            </div>
 
 
 
-        <div class="form-group">
-            <label asp-for="Location.Lat" class="control-label"></label>
-            <input type="number" min="-90" max="90" step="0.000000000000001"
-                   asp-for="Location.Lat" class="form-control" />
-            <span asp-validation-for="Location.Lat" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Location.Lng" class="control-label"></label>
-            <input type="number" min="-180" max="180" step="0.000000000000001"
-                   asp-for="Location.Lng" class="form-control" />
-            <span asp-validation-for="Location.Lng" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ImageFile" class="control-label"></label>
-            <input accept="image/*" asp-for="ImageFile" />
-            <span asp-validation-for="ImageFile" class="text-danger"></span>
-            <div class="text-danger">@ViewBag.Error</div>
+            <div class="form-group">
+                <label asp-for="Location.Lat" class="control-label"></label>
+                <input type="number" min="-90" max="90" step="0.000000000000001"
+                       asp-for="Location.Lat" class="form-control" />
+                <span asp-validation-for="Location.Lat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location.Lng" class="control-label"></label>
+                <input type="number" min="-180" max="180" step="0.000000000000001"
+                       asp-for="Location.Lng" class="form-control" />
+                <span asp-validation-for="Location.Lng" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input accept="image/*" asp-for="ImageFile" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                <div class="text-danger">@ViewBag.Error</div>
 
-        </div>
-        <div class="form-group">
-            <label asp-for="Location.Comment" class="control-label"></label>
-            <input asp-for="Location.Comment" class="form-control" />
-            <span asp-validation-for="Location.Comment" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Location.LocatedOn" class="control-label"></label>
-            <input asp-for="Location.LocatedOn" class="form-control" />
-            <span asp-validation-for="Location.LocatedOn" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <input onclick="checkForFile()"type="submit" value="Add Location" class="btn btn-primary" />
-        </div>
-    </form>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location.Comment" class="control-label"></label>
+                <input asp-for="Location.Comment" class="form-control" />
+                <span asp-validation-for="Location.Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location.LocatedOn" class="control-label"></label>
+                <input asp-for="Location.LocatedOn" class="form-control" />
+                <span asp-validation-for="Location.LocatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input onclick="checkForFile()" type="submit" value="Add Location" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 </div>
-
+}
 <div id="mapContainer"><div class="mapBox" id="map"></div></div>
 
 
@@ -232,13 +229,15 @@
                 url: '/images/Rock1.png', // url
                 scaledSize: new google.maps.Size(150, 150), // scaled size
                 origin: new google.maps.Point(0, 0), // origin
-                anchor: new google.maps.Point(0, 0) // anchor
-            };
+                anchor: new google.maps.Point(75, 75) // anchor
+            };  
 
             markers.push(
                 new google.maps.Marker({
                     position: position,
                     map: map,
+                    title: "You Found Me!",
+                    clickable: false,
                     icon: icon,
                     animation: google.maps.Animation.BOUNCE
                 })
@@ -246,6 +245,27 @@
 
             bounds.extend(position);
         });
+
+        if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+            var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+            var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+            bounds.extend(extendPoint1);
+            bounds.extend(extendPoint2);
+        }
+
+        //google.maps.event.addListener(map, 'zoom_changed', function () {
+        //    zoomChangeBoundsListener =
+        //        google.maps.event.addListener(map, 'bounds_changed', function (event) {
+        //            if (this.getZoom() > 18 && this.initialZoom == true) {
+        //                // Change max/min zoom here
+        //                this.setZoom(18);
+        //                this.initialZoom = false;
+        //            }
+        //            google.maps.event.removeListener(zoomChangeBoundsListener);
+        //        });
+        //});
+        //map.initialZoom = true;
+
 
         map.fitBounds(bounds);
 
@@ -294,3 +314,4 @@
 
     </script>
 }
+

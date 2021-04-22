@@ -1,4 +1,4 @@
-﻿@model Sailing_Rocks.Models.User
+@model Sailing_Rocks.Models.User
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
@@ -41,53 +41,64 @@
             </dl>
         </div>
     </div>
-    <h4>Rocks You Have Made</h4>
+
+
+    <h4>Rocks Made</h4>
+
     <section class="Images">
         @foreach (var rock in Model.Rocks)
         {
 
-        <div class="Content">
-            <p>@rock.Serial</p>
-            <a href="/Rock/Details/@rock.Id"><img src="@rock.Image" alt="Rock Photo"></a>
-        </div>
+
+            <div class="Content">
+                <a href="/Rock/Details/@rock.Id"><img src="@rock.Image" alt="Rock Photo"></a>
+                <h4>@rock.Name</h4>
+            </div>
 
         }
     </section>
-    <h4>Rocks You Have Found</h4>
+    <h4>Rocks Found</h4>
+
     <section class="Images">
         @foreach (var rock in Model.UserRocks)
         {
             <div class="Content">
-                <p>@rock.Rock.Serial</p>
-
                 @foreach (var location in rock.Rock.Locations)
                 {
-
-                    <a href="/Rock/Details/@rock.Id"><img src="@location.LocationImage" alt="Rock Photo"></a>
+                    <a href="/Rock/Details/@rock.RockId"><img src="@location.LocationImage" alt="Rock Photo"></a>
                 }
+                <h4>@rock.Rock.Name</h4>
+
             </div>
         }
     </section>
     <hr />
-    <div class="addRockContainter">
-        <div class="foundRock">
-            <a asp-action="Create" asp-controller="Rock">Add a new rock!</a>
-            <form class="foundRockForm"asp-action="FoundRock">
-                <label for="rockSerial">Add a found rock!</label><br>
-                <input type="text" id="serial" name="serial" placeholder="Rock Serial Number"><br>
-                <button type="submit" id="submitBtn">Submit</button>
-            </form>
-        </div>
+    @if (Convert.ToInt32(HttpContextAccessor.HttpContext.Session.GetString("UserId")) == Model.Id)
+    {
+        <div class="addRockContainter">
+            <div class="foundRock">
+                <a asp-action="Create" asp-controller="Rock">Add a new rock!</a>
+                <form class="foundRockForm" asp-action="FoundRock">
+                    <label for="rockSerial">Add a found rock!</label><br>
+                    <input type="text" id="serial" name="serial" placeholder="Rock Serial Number"><br>
+                    <button type="submit" id="submitBtn">Submit</button>
+                </form>
+            </div>
 
-        <div class="createRock">
+            <div class="createRock">
 
+            </div>
         </div>
-    </div>
+    }
 </div>
 <div class="profileLinks">
-    <a asp-action="Update" asp-route-id="@Model.Id">Edit Profile</a> |
+    @if (Convert.ToInt32(HttpContextAccessor.HttpContext.Session.GetString("UserId")) == Model.Id)
+    { 
+        <a asp-action="Update" asp-route-id="@Model.Id">Edit Profile</a>
+    }
     @*<a asp-action="Delete" asp-route-id="@Model.Id">Delete Account</a> |*@
-    <a asp-action="Index" asp-controller="Home">Back to Home</a>
+    | <a asp-action="Index" asp-controller="Home">Back to Home</a>
+
 </div>
 
 
