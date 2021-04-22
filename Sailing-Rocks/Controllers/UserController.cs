@@ -81,6 +81,11 @@ namespace Sailing_Rocks.Controllers
         [HttpPost]
         public ActionResult Update(User model)
         {
+            if (model.ImageFile == null)
+            {
+                return RedirectToAction("Update");
+            }
+            else { 
             string wwwRootPath = _hostEnvironment.WebRootPath;
             string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
             string extension = Path.GetExtension(model.ImageFile.FileName);
@@ -97,6 +102,7 @@ namespace Sailing_Rocks.Controllers
             ViewBag.Result = "You have updated your profile.";
 
             return RedirectToAction("Details","User");
+            }
         }
 
 
