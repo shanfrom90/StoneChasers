@@ -50,8 +50,6 @@ namespace Sailing_Rocks.Models
             }
         }
 
-        //add a default image?
-        [RegularExpression("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")]
         public string Image { get; set; }
 
         [NotMapped]

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Sailing_Rocks.Models;
 using System;
@@ -32,8 +32,10 @@ namespace Sailing_Rocks.Controllers
             return View();
         }
 
-        public IActionResult About()
-        { 
+
+        public IActionResult About() { 
+
+
             return View();
         }
 
