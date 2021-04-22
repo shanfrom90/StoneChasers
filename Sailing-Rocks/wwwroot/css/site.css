@@ -249,7 +249,7 @@ img {
     width: 320px;
     height: 320px;
     object-fit: cover;
-    object-position: top;
+    object-position: center;
 
 /*    border-radius: 6px;
 */}
