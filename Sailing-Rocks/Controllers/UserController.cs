@@ -53,13 +53,20 @@ namespace Sailing_Rocks.Controllers
             return RedirectToAction("Login", "User");
         }
 
-        public ViewResult Details(string? message)
+        public ViewResult Details(string? message, int? id)
         {
             ViewBag.message = message;
+            User user;
+            if(id == null)
+            {
             var UserId = HttpContext.Session.GetString("UserId");
-            var user = userRepo.GetById(Convert.ToInt32(UserId));
-
-            return View(user);
+            user = userRepo.GetById(Convert.ToInt32(UserId));
+            }
+            else
+            {
+                user = userRepo.GetById((int)id);
+            }
+                return View(user);
         }
 
         public ViewResult Update(int id)
