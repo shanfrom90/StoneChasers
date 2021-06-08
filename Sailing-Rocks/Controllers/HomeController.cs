@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Sailing_Rocks.Models;
 using System;
@@ -20,8 +20,25 @@ namespace Sailing_Rocks.Controllers
 
         public IActionResult Index()
         {
+            SailingRocksContext db = new SailingRocksContext();
+            ViewBag.LatestRocks = db.Rocks.OrderByDescending(r => r.Id).Take(6);
+
+
             return View();
         }
+
+        public IActionResult Community()
+        {
+            return View();
+        }
+
+
+        public IActionResult About() { 
+
+
+            return View();
+        }
+
 
         public IActionResult Privacy()
         {

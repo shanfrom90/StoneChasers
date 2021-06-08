@@ -1,8 +1,211 @@
-﻿@{
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@model Sailing_Rocks.Models.User
+
+@{
     ViewData["Title"] = "Home Page";
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
 }
+@section styles{ }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <img class="Logo" src="/images/Logo.png"/>
+    <div class="welcomeP">
+        <h5 class="display-4">Welcome Stone Chasers!</h5>
+        <p>Found a rock? Enter the code on the back of it to learn more about your rock and the places it has been.</p>
+        <hr />
+        <p>Sign up to add where you found the rock and get started creating your own rocks to put out into the world. The goal is to spread kindness and positivity across the globe by sharing rocks you've created and found.</p>
+        <hr />
+        <p>For help getting started head over to the Community page for tips and inspiration and find a local group in your area!</p>
+    </div>
+
+    <div class="homeContent">
+        @if (String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserId")))
+        {
+            <div class="loginContainer">
+                <form class="loginForm" asp-area="" asp-controller="User" asp-action="Login">
+                    <div asp-validation-summary="ModelOnly" class="text-danger">@ViewBag.ResultMessage</div>
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <label asp-for="Password" class="control-label"></label>
+                    <input type="password" asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                    <br />
+
+                    <input type="submit" value="Login" class="btn btn-primary" />
+                </form>
+                @if (String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserId")))
+                {
+                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Create">Register New User</a>
+                }
+            </div>
+        }
+
+
+        <hr />
+
+
+
+        <h2>Featured Rocks</h2>
+        <div class="Images">
+            @foreach (var rock in (IEnumerable<Rock>)ViewBag.LatestRocks)
+            {
+                <div class="Content">
+                    <a href="/Rock/Details/@rock.Id"><img src=" @rock.Image " /></a>
+                    <h4>@rock.Name</h4>
+                </div>
+            }
+        </div>
+        <hr />
+        <div class="foundRock">
+            <label for="rockSerial">See where your found rock has been!</label><br>
+
+            <input type="text" id="rockSerial" name="rockSerial" placeholder="Rock Serial Number" />
+            <br />
+            <button type="submit" id="submitBtn">Submit</button>
+        </div>
+    </div>
+
+    <div id="mapContainer">
+        @*<div class="mapBox" id="map"></div>*@
+    </div>
+
 </div>
+
+@section scripts {
+    <script>
+
+        const submitFormButton = document.querySelector(".foundRock button");
+        const map_url = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDxEiiPssDguXJXixsSljlWov1JZjpt3fk&callback=initMap&signed_in=true&language=';
+        const userInputSerial = document.getElementById("rockSerial");
+        var url = "https://localhost:44366/Rock/getrocklocationbyserial?serial=";
+        var markers;
+        var bounds;
+        var map;
+        //var inputValue;
+
+        function initMap() {
+            
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: parseFloat(41.47463327829468), lng: parseFloat(-81.78872226820937) },
+                zoom: 10
+            });
+
+            
+            fetch(url)
+                .then(function (response) { return response.json() })
+                .then(plotMarkers);
+        }
+
+        function mapLocations() {
+            if (document.querySelectorAll('#map').length > 0) {
+                if (document.querySelector('html').lang)
+                    lang = document.querySelector('html').lang;
+                else
+                    lang = 'en';
+            var js_file = document.createElement('script');
+            js_file.type = 'text/javascript';
+            js_file.src = `${map_url}` + lang;
+            document.getElementsByTagName('head')[0].appendChild(js_file);
+            }
+         };
+
+        function plotMarkers(m) {
+            markers = [];
+            bounds = new google.maps.LatLngBounds();
+
+            console.log(m);
+            console.log(typeof m);
+                
+            var map_json = JSON.parse(m);
+
+            map_json.forEach(function (marker) {
+                //console.log(marker.Lat);
+                //console.log(marker.Lng);
+                var position = new google.maps.LatLng(marker.Lat, marker.Lng, { zoom: 10 });
+                var icon = {
+                    url: '/images/Rock1.png', // url
+                    scaledSize: new google.maps.Size(150, 150), // scaled size
+                    origin: new google.maps.Point(0, 0), // origin
+                    anchor: new google.maps.Point(75, 75) // anchor
+                };
+
+                markers.push(
+                    new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        title: "You Found Me!",
+                        clickable: false,
+                        icon: icon,
+                        animation: google.maps.Animation.BOUNCE
+
+                    })
+                );
+
+                bounds.extend(position);
+            });
+
+            if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+                var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+                var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+                bounds.extend(extendPoint1);
+                bounds.extend(extendPoint2);
+            }
+
+            //google.maps.event.addListener(map, 'zoom_changed', function () {
+            //    zoomChangeBoundsListener =
+            //        google.maps.event.addListener(map, 'bounds_changed', function (event) {
+            //            if (this.getZoom() > 18 && this.initialZoom == true) {
+            //                // Change max/min zoom here
+            //                this.setZoom(18);
+            //                this.initialZoom = false;
+            //            }
+            //            google.maps.event.removeListener(zoomChangeBoundsListener);
+            //        });
+            //});
+            //map.initialZoom = true;
+
+
+            map.fitBounds(bounds);
+            
+        }
+
+
+        submitFormButton.addEventListener('click', function () {
+            
+
+            if (document.getElementById('map') == null) {
+                const inputValue = userInputSerial.value;
+                url += inputValue;
+                let mapBox = document.createElement("div");
+                mapBox.className = "mapBox";
+                mapBox.id = "map";
+                console.log(mapBox);
+                let mapContainer = document.getElementById("mapContainer");
+                mapContainer.appendChild(mapBox);
+
+                mapLocations();
+
+                console.log(url);
+            }
+            else {
+                url = url.slice(0, -8);
+                const inputValue = userInputSerial.value;
+                url += inputValue;
+                
+                mapLocations();
+                
+                console.log(url);
+            }
+        //document.addEventListener('DOMContentLoaded', function (){
+    });
+       
+    </script>
+}
+

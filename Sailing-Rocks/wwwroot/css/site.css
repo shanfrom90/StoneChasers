@@ -1,5 +1,13 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+
+/* Color Pallet 
+    #242e36 dark grey
+    #5a6069 med grey
+    #828798 light grey
+    #d9beb0  peach
+    #fbf9e9 Ivory
+*/
 
 a.navbar-brand {
   white-space: normal;
@@ -9,25 +17,81 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #242e36;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    a:hover {
+        font-weight: bold;
+    }
+
+/*.btn-primary {
+    color: #242e36;
+    background-color: #d9beb0;
+    border-color: #242E36;
+    border-width: 2px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+button {
+    background-color: #d9beb0;
+    color: #242e36;
+    border-color: #242E36;
+    border-width: 2px;
+    border-radius: .25rem;
+    margin: 1em;
+}*/
+
+
+/*.btn, button {
+    
+}*/
+
+.btn, button {
+    background-image: linear-gradient(to right, #828798 0%, #fbf9e9 51%, #828798 100%);
+    background-color: none;
+    margin-top: 10px;
+    padding: 5px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border: solid 1px;
+    border-color: #242e36;
+    border-radius: 6px;
+    display: block;
+    font-weight: bold;
 }
+
+    .btn:hover, button:hover {
+        background-position: right center;
+        border: solid 1px;
+        border-color: #242e36; 
+        color: #242e36;
+        text-decoration: none;
+        font-weight: bold;
+    }
+         
+
+
+nav {
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+}
+
+.nav-link {
+    color: #242e36 !important;
+}
+
+    .nav-link:hover {
+        color: #d9beb0 !important;
+        font-weight: bold;
+    }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 @media (min-width: 768px) {
   html {
@@ -36,10 +100,10 @@ html {
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #242E36;
 }
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #242E36;
 }
 
 .box-shadow {
@@ -54,18 +118,254 @@ button.accept-policy {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
+  color: #242e36;
   position: relative;
   min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: #828798;
+    background-image: url(/images/concrete-wall-2.png);
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    margin-top: 2em;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+#map {
+    height: 600px;
+    width: 100%;
+    margin-top: 2em;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0, .5);
+    transition: 0.5s;
+
+}
+
+.mainContainer{
+    padding: 4em 8em;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.homeContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+    
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+    padding: 2em 2em 4em 2em;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0, .5);
+    transition: 0.5s;
+    max-width: 60%;
+   
+}
+
+.loginForm {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.foundRock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+    padding: 2em 2em 4em 2em;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0, .5);
+    transition: 0.5s;
+    max-width: 60%;
+}
+
+
+
+
+/*#mapContainer {
+    padding: 1em;
+    background-color: #d9beb0;
+    background-image: url(/images/gravel.png);
+}*/
+
+.Images {
+    border-radius: 6px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 1em;
+    justify-content: space-around;
+}
+
+.Content {
+
+/*    border-radius: 6px !important;
+*/    margin: 1em;
+    background-color: white;
+/*    background-image: url(/images/asfalt-dark.png);
+*/    width: 352px;
+
+    border: 1px;
+    -moz-box-shadow: 0 0 10px #000000;
+    -webkit-box-shadow: 0 0 10px #000000;
+    box-shadow: 0 0 10px #000000;
+    padding: 1em;
+    padding-bottom: 1em;
+
+}
+.Content p {
+    padding-left: 1em;
+}
+
+.userRocksContent a {
+    padding-left: 1em;
+}
+img {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    object-position: center;
+
+/*    border-radius: 6px;
+*/}
+
+
+.Content:hover {
+    -moz-box-shadow: 0 0 20px #000000;
+    -webkit-box-shadow: 0 0 20px #000000;
+    box-shadow: 0 0 20px #000000;
+}
+
+.profileContainer {
+    border-radius: 6px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 1em;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+    padding: 1em;
+}
+
+.profileTable dl dd {
+    padding-left: 10em;
+    padding-top: 1em;
+}
+
+.profileTable dl dt {
+    width: 10em;
+    padding-left: 2em;
+    padding-top: 1em;
+}
+
+.addRockContainter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 1em;
+    justify-content: center;
+
+}
+
+.foundRock a {
+    margin: 1em;
+}
+
+.profileLinks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 1em;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.rockDetails {
+    border-radius: 6px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 1em;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+    padding: 1em;
+}
+
+.rockDetails {
+    padding-left: 1em;
+}
+
+.foundRockForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.row {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+h4 {
+    margin-top: 1em;
+}
+
+.editRock, .addLocation, .editUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.welcomeP, .about {
+    border-radius: 6px;
+    margin: 1em;
+    background-color: #fbf9e9;
+    background-image: url(/images/asfalt-dark.png);
+    padding: 1em;
+    -moz-box-shadow: 0 0 10px #000000;
+    -webkit-box-shadow: 0 0 10px #000000;
+    box-shadow: 0 0 10px #000000;
+}
+.Logo {
+    width: 500px;
+    height: auto;
+    object-fit: contain;
+    object-position: top;
+}
+
+.aboutContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }

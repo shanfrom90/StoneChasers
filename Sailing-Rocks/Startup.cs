@@ -1,3 +1,5 @@
+using Sailing_Rocks.Models;
+using Sailing_Rocks.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,6 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Sailing_Rocks.Repository;
+
+
+using Newtonsoft.Json;
+
+
+using Microsoft.AspNetCore.Http;
+
 
 namespace Sailing_Rocks
 {
@@ -23,7 +33,27 @@ namespace Sailing_Rocks
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddSession();
+            services.AddMvc();
+            services.AddDbContext<SailingRocksContext>();
+            services.AddControllers().AddNewtonsoftJson(o =>
+            {
+                o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+            services.AddControllersWithViews().AddRazorRuntimeCompilation(); 
+            services.AddScoped<IRepository<User>, UserRepository>();
+            services.AddScoped<IRepository<Rock>, RockRepository>();
+            services.AddScoped<IRepository<Location>, LocationRepository>();
+            services.AddScoped<IRepository<UserRock>, UserRockRepository>();
+
+
+
+
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +73,7 @@ namespace Sailing_Rocks
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
